@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="一. 环境搭建步骤
+安装 qt-opensource-linux-x64-5.7.1.run
+安装 gcc，g++
+数据库加密驱动编译 QtCipherSqlitePlugin 生成 libsqlitecipher.so (25上也有), 并拷贝到 /home/xinda/Qt5.7.1/5.7/g">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2020-12-05T09:26:00.701Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2020-12-05
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name"></h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.</span> <span class="toc-text">一. 环境搭建步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C-%E7%BC%96%E8%AF%91%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">二. 编译时遇到的问题：</span></a></li></ol>
+    </div>
+    
+    <h1 id="一-环境搭建步骤"><a href="#一-环境搭建步骤" class="headerlink" title="一. 环境搭建步骤"></a>一. 环境搭建步骤</h1><ol>
+<li>安装 qt-opensource-linux-x64-5.7.1.run</li>
+<li>安装 gcc，g++</li>
+<li>数据库加密驱动<br>编译 QtCipherSqlitePlugin 生成 libsqlitecipher.so (25上也有), 并拷贝到 /home/xinda/Qt5.7.1/5.7/gcc_64/plugins/sqldrivers中。</li>
+</ol>
+<h1 id="二-编译时遇到的问题："><a href="#二-编译时遇到的问题：" class="headerlink" title="二. 编译时遇到的问题："></a>二. 编译时遇到的问题：</h1><p>问题:<br>Could not start process “make” qmake_all<br>解决:<br><code>sudo apt-get install build-essential</code></p>
+<p>问题:<br>/usr/bin/ld: cannot find -lGL<br>解决:<br><code>sudo apt-get install libgl1-mesa-dev</code></p>
+<p>问题:<br>:-1: error: No rule to make target ‘/home/xinda/qt-linux-git/src/jgapi/../../../../../usr/lib/x86_64-linux-gnu/libssl.a’, needed by ‘libjgapi.a’. Stop.<br>解决:<br>拷贝<code>libssl.a</code>(\10.0.0.25\公司数据盘_software\windows\youduqt环境搭建 目录)到 /usr/lib/x86_64-linux-gnu/ 目录</p>
+<p>问题:<br>:-1: error: No rule to make target ‘/home/xinda/qt-linux-git/src/youduqt/../../../../../usr/lib/x86_64-linux-gnu/libcrypto.a’, needed by ‘../output/debug/youduqt’. Stop.<br>解决:<br>拷贝<code>libcrypto.a</code>(\10.0.0.25\公司数据盘_software\windows\youduqt环境搭建 目录)到 /usr/lib/x86_64-linux-gnu/ 目录 </p>
+<p>问题:<br>:-1: error: cannot find -lssl<br>解决：<br>切换到 /usr/lib/x86_64-linux-gnu/ 目录<br><code>sudo ln -s libssl.so.1.0.0 libssl.so</code></p>
+<p>问题:<br>:-1: error: /home/xinda/qt-linux-git/src/youduqt/../../../../../usr/lib/x86_64-linux-gnu/libcrypto.a(dso_dlfcn.o): undefined reference to symbol ‘dlclose@@GLIBC_2.2.5’<br>解决：<br>    切换到 /usr/lib/x86_64-linux-gnu/ 目录，<code>sudo ln -s libcrypto.so.1.0.0 libcrypto.so</code></p>
+<p>问题<br>:/usr/bin/ld: /home/xinda/build-youduqt-Desktop_Qt_5_7_1_GCC_64bit-Release/youduqt/../jgapi//libjgapi.a(AsyncSocket.o): undefined reference to symbol ‘SSLv23_client_method@@OPENSSL_1.0.0’<br>解决：<br><code>sudo apt-get install libssl-dev</code></p>
+<p>问题<br>/home/xinda/build-youduqt-Desktop_Qt_5_7_1_GCC_64bit-Release/youduqt/../jgapi//libjgapi.a(AsyncSocket.o): In function <code>asio::ssl::context::context(asio::ssl::context_base::method)&#39;: /home/xinda/build-youduqt-Desktop_Qt_5_7_1_GCC_64bit-Release/jgapi/../../qt-linux-git/src/deps/asio/include/asio/ssl/impl/context.ipp:80: undefined reference to </code>SSLv2_method’<br>/home/xinda/build-youduqt-Desktop_Qt_5_7_1_GCC_64bit-Release/jgapi/../../qt-linux-git/src/deps/asio/include/asio/ssl/impl/context.ipp:83: undefined reference to <code>SSLv2_client_method&#39; /home/xinda/build-youduqt-Desktop_Qt_5_7_1_GCC_64bit-Release/jgapi/../../qt-linux-git/src/deps/asio/include/asio/ssl/impl/context.ipp:86: undefined reference to </code>SSLv2_server_method’<br>collect2: error: ld returned 1 exit status<br>make[1]: *** [../output/debug/youduqt] Error 1<br>解决:<br>将/home/xinda/qt-linux-git/src/deps/asio/include/asio/ssl/impl/context.ipp中的<br><code>#else // defined(OPENSSL_NO_SSL2)</code><br>改为<br><code>#elseif defined(OPENSSL_NO_SSL2)</code></p>
+<p>问题</p>
+<p>fail to write template file</p>
+<p>解决:</p>
+<p>1.首先确认ca-bundle.crt是否在运行的youquqt可执行文件目录下,如果没有则添加.</p>
+<p>2.如果已有ca-bundle.crt在相应的目录下,则需要添加查看在依赖的curl文件下查看./curl –version,查看curl是否与相应的版本的openssl进行链接.如果没有,则需要链接到相应的openssl(youduqt工程采用的是openssl_1_0_2g)进行重新编译.</p>
+<p>问题</p>
+<p>Error while loading shared object: libssl.so.1.0.0</p>
+<p>解决：</p>
+<p>1、拷贝并修改/qt-linux/src/deps/openssl/lib/下的 libssl.so文件名称为libssl.so.1.0.0</p>
+<p>2、把该文件拷贝到目录/lib/x86_64-linux-gnu/</p>
+<p>问题</p>
+<p>Error while building/deploying project youduqt (kit: Desktop Qt 5.7.1 GCC 64bit)</p>
+<p>When executing step “qmake”</p>
+<p>原因：缺少cmake</p>
+<p>解决：</p>
+<p>sudo apt-get install cmake</p>
+<p>还是同一个错误可以重启软件试下</p>
+<p>问题</p>
+<p>:-1: error: g++：命令未找到</p>
+<p>原因：缺少g++</p>
+<p>解决</p>
+<p>sudo apt-get install g++</p>
+<p>还是同一个错误可以重启软件试下</p>
+<p>问题</p>
+<p>:-1: error: /home/xinda/Qt5.7.1/5.7/gcc_64/bin/qmake：命令未找到</p>
+<p>解决</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/GitzLiu/article/details/53993978">https://blog.csdn.net/GitzLiu/article/details/53993978</a></p>
+<p>问题</p>
+<p>error while loading shared libraries: libcrypto.so.1.0.0: cannot open shared object file: No such file or directory</p>
+<p>解决</p>
+<p>拷贝并修改/qt-linux/src/deps/openssl/lib/下的 libcrypto.so文件名称为libcrypto.so.1.0.0</p>
+<p>（打包时依赖）把该文件拷贝到目录/lib/x86_64-linux-gnu/</p>
+<p>问题</p>
+<p>unknown debugger type “no engine”</p>
+<p>原因：缺少gdb</p>
+<p>解决：</p>
+<p>sudo apt-get install gdb</p>
+<p>然后重启qtCreator</p>
+
+  </div>
+
+</article>
+
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>
