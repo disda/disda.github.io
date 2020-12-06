@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>05-deepin上打包deb包 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="，首先建立一个目录结构如下的
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748xinda@xinda:~/Downloads$ tree youdu-qt_192.8.14_">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="05-deepin上打包deb包"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-08-27T05:10:37.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-08-27
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">05-deepin上打包deb包</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <p>，首先建立一个目录结构如下的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">xinda@xinda:~/Downloads$ tree youdu-qt_192.8.14_amd64</span><br><span class="line">youdu-qt_192.8.14_amd64</span><br><span class="line">├── data</span><br><span class="line">│   └── usr</span><br><span class="line">│   ├── bin</span><br><span class="line">│   │   └── youduqt</span><br><span class="line">│   └── share</span><br><span class="line">│   ├── applications   </span><br><span class="line">│   │   └── youduqt.desktop    //这个文件需要移动 /user/share/application/下作为桌面快捷方式</span><br><span class="line">│   ├── doc</span><br><span class="line">│   │   └── youduqt</span><br><span class="line">│   │   ├── changelog             //版本更新</span><br><span class="line">│   │   └── copyright</span><br><span class="line">│   ├── icons      // 不同尺寸的下的图标</span><br><span class="line">│   │   └── hicolor</span><br><span class="line">│   │   ├── 128x128</span><br><span class="line">│   │   │   └── apps</span><br><span class="line">│   │   │   └── youduqt.png</span><br><span class="line">│   │   ├── 16x16</span><br><span class="line">│   │   │   └── apps</span><br><span class="line">│   │   │   └── youduqt.png</span><br><span class="line">│   │   ├── 22x22</span><br><span class="line">│   │   │   └── apps</span><br><span class="line">│   │   │   └── youduqt.png</span><br><span class="line">│   │   ├── 24x24</span><br><span class="line">│   │   │   └── apps</span><br><span class="line">│   │   │   └── youduqt.png</span><br><span class="line">│   │   ├── 256x256</span><br><span class="line">│   │   │   └── apps</span><br><span class="line">│   │   │   └── youduqt.png</span><br><span class="line">│   │   ├── 32x32</span><br><span class="line">│   │   │   └── apps</span><br><span class="line">│   │   │   └── youduqt.png</span><br><span class="line">│   │   ├── 48x48</span><br><span class="line">│   │   │   └── apps</span><br><span class="line">│   │   │   └── youduqt.png</span><br><span class="line">│   │   ├── 512x512</span><br><span class="line">│   │   │   └── apps</span><br><span class="line">│   │   │   └── youduqt.png</span><br><span class="line">│   │   └── 64x64</span><br><span class="line">│   │   └── apps</span><br><span class="line">│   │   └── youduqt.png</span><br><span class="line">│   └── pixmaps</span><br><span class="line">│   └── youduqt.png</span><br><span class="line">├── DEBIAN</span><br><span class="line">│   ├── control    //</span><br><span class="line">│   └── postinst //安装时执行的脚本文件</span><br><span class="line">└── debian-binary</span><br></pre></td></tr></table></figure>
+<p> youdu-qt_192.8.14_amd64的parent目录下，执行sudo dpkg -b youdu-qt_192.8.14_amd64/ youdu-qt_192.8.14_amd64.deb</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/09/16/01-Linux平台编译和遇到的问题-md/" class="prev">上一篇：Linux平台编译和遇到的问题</a>
+    
+    
+    <a href="/2019/08/25/27-安装qtcreator代码风格插件/" class="next">下一篇：27-安装qtcreator代码风格插件</a>
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

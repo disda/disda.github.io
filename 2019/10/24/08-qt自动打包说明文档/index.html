@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>qt自动打包说明文档 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="一、打包前的环境准备：python2及python3的安装（如果少模块请自行安装）设置同步目录根据电脑的情况设置const.py文件里的全局变量git安装及账号配置rpmbuild的安装linuxdeployqt的下载（注意：下载发行版5，防止出现新版（6版本及更新）生成默认桌面文件时报错）及添入环">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="qt自动打包说明文档"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-10-24T05:19:59.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-10-24
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">qt自动打包说明文档</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%89%93%E5%8C%85%E5%89%8D%E7%9A%84%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">一、打包前的环境准备：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%89%93%E5%8C%85%E6%80%BB%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">二、打包总过程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%90%8E%E7%BB%AD%E9%9C%80%E8%A6%81%E5%AE%8C%E5%96%84%E7%9A%84%E9%83%A8%E5%88%86%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">三、后续需要完善的部分：</span></a></li></ol>
+    </div>
+    
+    <h3 id="一、打包前的环境准备："><a href="#一、打包前的环境准备：" class="headerlink" title="一、打包前的环境准备："></a>一、打包前的环境准备：</h3><p>python2及python3的安装（如果少模块请自行安装）<br>设置同步目录<br>根据电脑的情况设置const.py文件里的全局变量<br>git安装及账号配置<br>rpmbuild的安装<br>linuxdeployqt的下载（注意：下载发行版5，防止出现新版（6版本及更新）生成默认桌面文件时报错）及添入环境变量<br>获取git的linux-qt代码（最好从25拿，有现成编译好的依赖库）<br>编译依赖库（根据 thrid_part/build-guide.md）<br>参考：01-Linux平台编译及遇到的问题 进行平台编译<br>参考：03-Linux下QtCreator输入中文问题(也可以解决打的包无法输入中文问题)解决无法输入中文问题<br>参考：02-Linux平台打包AppImage格式的可执行文件 确认可以生产appimage文件，同时记得设置linuxdeployqt为系统可执行文件<br>jenkins的配置，从节点及项目的配置，可参考：_Sonarqube+Gitlab+Jenkins持续集成方案 ，如果出现账号问题，要先配置git账号<br>修改linux的默认权限umask 000，可参考：<a target="_blank" rel="noopener" href="https://www.ludou.org/ubuntu-umask.html%EF%BC%8C%E7%A1%AE%E4%BF%9D%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E8%B6%B3%E5%A4%9F%E5%B9%B6%E6%94%AF%E6%8C%81%E6%89%93%E5%8C%85">https://www.ludou.org/ubuntu-umask.html，确保普通用户权限足够并支持打包</a></p>
+<h3 id="二、打包总过程："><a href="#二、打包总过程：" class="headerlink" title="二、打包总过程："></a>二、打包总过程：</h3><p>确保环境准备完成<br>调用main.py类<br>检查依赖<br>版本处理（包括获取目前版本，版本更新）<br>构建youduqt.pro项目文件<br>生成符号文件<br>生成appimage文件<br>生成deb和rpm文件<br>上传25<br>提交git</p>
+<h3 id="三、后续需要完善的部分："><a href="#三、后续需要完善的部分：" class="headerlink" title="三、后续需要完善的部分："></a>三、后续需要完善的部分：</h3><p>根据不同分支建立不同目录存放安装文件<br>四、注意事项：<br>不要sudo方式执行python脚本，否则执行的文件的权限可能不足<br>需要定时清理54的同步目录（/media/xinda/新加卷/sync25Dir/）的空间，空间不足会引起打包失败<br>五、打包错误情况汇总：<br>问题：</p>
+<p>command dpkg failed, reason: dpkg-deb：错误：control目录的的权限位是 777 (必须 &gt;=0755 且 &lt;=0755)<br>解决：<br>修改DEBIAN目录的权限为755</p>
+<p>问题：<br>中标启动更新模块时： This application failed to start because it could not find or load the Qt platform plugin “xcb”</p>
+<p>分析：</p>
+<p>libqxcb的所依赖的库问题出问题，libqxcb是存在的</p>
+<p>解决：</p>
+<p>export QT_DEBUG_PLUGINS=1</p>
+<p>输出Got keys from plugin meta data (“xcb”)<br>QFactoryLoader::QFactoryLoader() checking directory path “/home/xinda/squashfs-root/platforms” …<br>Cannot load library /home/xinda/squashfs-root/plugins/platforms/libqxcb.so: (/home/xinda/squashfs-root/plugins/platforms/../../lib/libQt5XcbQpa.so.5: symbol _ZTI18QPlatformClipboard, version Qt_5 not defined in file libQt5Gui.so.5 with link time reference)<br>QLibraryPrivate::loadPlugin failed on “/home/xinda/squashfs-root/plugins/platforms/libqxcb.so” : “Cannot load library /home/xinda/squashfs-root/plugins/platforms/libqxcb.so: (/home/xinda/squashfs-root/plugins/platforms/../../lib/libQt5XcbQpa.so.5: symbol _ZTI18QPlatformClipboard, version Qt_5 not defined in file libQt5Gui.so.5 with link time reference)”<br>This application failed to start because it could not find or load the Qt platform plugin “xcb”<br>in “”.</p>
+<p>说明libQt5XcbQpa.so.5有问题</p>
+<p>最后update也用appimage的形式解决该问题</p>
+<p>问题：</p>
+<p>中标麒麟启动时报段错误</p>
+<p>解决：</p>
+<p>打包机器深度的g++和gcc版本为6.3，后来降为5.5后没有报该错误</p>
+<p>问题（）：</p>
+<p>./youduqt-192.9.27.AppImage: relocation error: /tmp/.mount_youduqCHUVsG/lib/libpthread.so.0: symbol __tunable_get_val, version GLIBC_PRIVATE not defined in file ld-linux-x86-64.so.2 with link time reference</p>
+<p>分析</p>
+<p>查资料可能是glibc版本过高，深度打包机器最高2.27，中标2.18，然后libc.so.6软连接的是libc.2.27.so，和最高版本一致，而glibc是系统依赖的运行库</p>
+<p>解决</p>
+<p>换glibc版本更低的ubuntu16打包</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/12/27/33-消息转发/" class="prev">上一篇：消息转发方案</a>
+    
+    
+    <a href="/2019/09/27/32-字符编码问题/" class="next">下一篇：字符编码问题</a>
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

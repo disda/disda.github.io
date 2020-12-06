@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>Qt编码规范 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="概要大部分遵循我们原本pc下的代码规范。但是对于现新开展的Qt项目，因为和我们现有的duilib的PC项目还是有区别的。所以有一下几点要求，希望大家进行遵循，没有什么坏处。如果大家还有其他合理的能提高我们代码质量的，可以继续添加。
+命名总结
+
+变量名/函数名采用驼峰命名法(lowerCaseCame">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="Qt编码规范"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-06-05T05:41:20.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-06-05
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">Qt编码规范</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <p>概要<br>大部分遵循我们原本pc下的代码规范。但是对于现新开展的Qt项目，因为和我们现有的duilib的PC项目还是有区别的。所以有一下几点要求，希望大家进行遵循，没有什么坏处。如果大家还有其他合理的能提高我们代码质量的，可以继续添加。</p>
+<p>命名总结</p>
+<ol>
+<li>变量名/函数名采用驼峰命名法(lowerCaseCamel), 首字母缩写词出现的命名中, 缩写也用驼峰命名。</li>
+</ol>
+<p>short counter;<br>char itemDelimiter;<br>void myXmlStreamReader();</p>
+<ol start="2">
+<li><p>private成员变量添加 <code>m_</code> 前缀，全局变量添加 <code>g_</code> 前缀。</p>
+</li>
+<li><p>private函数以 <code>_</code> 开头，首字母小写，例：”_funName()”。</p>
+</li>
+<li><p>public首字母大写，例：“GetEntShortName()”;</p>
+</li>
+<li><p>slots以 <code>_on</code> 开头。</p>
+</li>
+<li><p>signals以 <code>on</code> 开头。</p>
+</li>
+<li><p>常量命名：常量不含前缀且应该大写，单词间有下划线，包括全局常量和宏定义。</p>
+</li>
+</ol>
+<p>编码规范</p>
+<ol>
+<li>指针/引用 在类型名和<code>*</code>或<code>&amp;</code>之间有一个空格, 在<code>*</code>或<code>&amp;</code>与变量名之间没有空格。</li>
+</ol>
+<p>QListWidgetItem *item(int row) const;<br>int row(const QListWidgetItem *item) const;<br>void insertItem(int row, QListWidgetItem *item);<br>void insertItem(int row, const QString &amp;label);<br>2. 空白行与空格的使用</p>
+<p>用空行在适当的地方划分代码块</p>
+<p>总是只用一个空行</p>
+<p>在关键词和花括号之间总是只用一个空格符</p>
+<p>// Wrong<br>if(foo){<br>}</p>
+<p>// Correct<br>if (foo) {<br>}<br>3. 逗号</p>
+<p>逗号左边没有空格，逗号右边有一个空格</p>
+<p>#include <QApplication><br>#include <QMessageBox></p>
+<p>int main(int argc, char *argv[]) {<br>    QT_REQUIRE_VERSION(argc, argv, “4.0.2”);</p>
+<pre><code>QApplication app(argc, argv);
+
+return app.exec();</code></pre>
+<p>}<br>4. 花括号</p>
+<p>使用紧贴括号：左括号和语句的开头在同一行，如果右括号是紧跟在一个关键词之后的，则右括号和该关键词在同一行。</p>
+<p>if, while 方法体只有一行语句时，也需要添加花括号。</p>
+<p>// Wrong<br>if (codec)<br>{<br>}<br>else<br>{<br>}</p>
+<p>// Correct<br>if (codec) {<br>} else {<br>}<br>代码规范</p>
+<ol>
+<li>类声明中的编排</li>
+</ol>
+<p>请按照Q_OBJECT, public, signals, slots, protected, private的顺序将成员变量和函数进行编排。</p>
+<ol start="2">
+<li>对于界面类，如果我们使用了信号和槽，请一定在class声明的第一行加上Q_OBJECT。</li>
+</ol>
+<ol start="3">
+<li>对于信号和槽函数的连接，使用返回值对信号和槽连接是否成功进行判断。</li>
+</ol>
+<p>bool bConnected = QObject::connect();Q_ASSERT(bConnected);</p>
+<ol start="4">
+<li>Qt下的一些内存问题</li>
+</ol>
+<p>QObject及其派生类的对象，如果其parent非0，那么parent析构时会析构该对象。所以我们如果不想delete，尽量将控件的parent设置为其父窗口。<br>QWidget及其派生类的对象，可以设置Qt::WA_DeleteOnClose标志位，当close会析构该对象。<br>QAbstractAnimation派生类的对象，可以设置QAbstractAnimation::DeleteWhenStopped。<br>QRunnable::setAutoDelete()，MediaSource::setAutoDelete()</p>
+<ol start="5">
+<li>界面设计</li>
+</ol>
+<p>设计QT界面时，请尽量使用布局管理器进行布局管理，避免使用绝对坐标。</p>
+<ol start="6">
+<li>不推荐直接删除QObject,在带有事件循环的程序中，最好利用QObject::deleteLater()来删除。</li>
+</ol>
+<p>参考<br>Qt Contribution Guidelines <a target="_blank" rel="noopener" href="https://wiki.qt.io/Qt_Contribution_Guidelines">https://wiki.qt.io/Qt_Contribution_Guidelines</a>)<br>Qt Coding Style <a target="_blank" rel="noopener" href="https://wiki.qt.io/Qt_Coding_Style">https://wiki.qt.io/Qt_Coding_Style</a>)<br>Coding Conventions <a target="_blank" rel="noopener" href="https://wiki.qt.io/Coding_Conventions">https://wiki.qt.io/Coding_Conventions</a>)<br>Google C++ Style Guide <a target="_blank" rel="noopener" href="https://google.github.io/styleguide/cppguide.html">https://google.github.io/styleguide/cppguide.html</a><br>Qt编码规范 <a target="_blank" rel="noopener" href="http://read.pudn.com/downloads38/doc/126911/QT%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.pdf">http://read.pudn.com/downloads38/doc/126911/QT%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.pdf</a><br>内存管理 <a target="_blank" rel="noopener" href="https://blog.csdn.net/taiyang1987912/article/details/29271549">https://blog.csdn.net/taiyang1987912/article/details/29271549</a>)</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/06/05/30-多语言方案/" class="prev">上一篇：Qt多语言方案</a>
+    
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

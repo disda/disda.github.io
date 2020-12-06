@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>31-消息重发机制方案 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="场景:
+ 用户在消息4，和消息5之间发送一条消息失败了，这时这条消息应该怎么进行存储，让用户在窗口下次打开的时候重新发送消息。
+逻辑交互方案确定：
+ 消息发送失败，在消息旁边显示感叹号。在不同会话之间切换窗口之间切换，不进行弹窗的提醒。加载一个会话，如果会话有发送失败的消息，将此消息插入到用户当时发">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="31-消息重发机制方案"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-07-13T05:44:21.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-07-13
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">31-消息重发机制方案</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <p>场景:</p>
+<p> 用户在消息4，和消息5之间发送一条消息失败了，这时这条消息应该怎么进行存储，让用户在窗口下次打开的时候重新发送消息。</p>
+<p>逻辑交互方案确定：</p>
+<p> 消息发送失败，在消息旁边显示感叹号。<br>在不同会话之间切换窗口之间切换，不进行弹窗的提醒。<br>加载一个会话，如果会话有发送失败的消息，将此消息插入到用户当时发送的上下文位置（和现在pc的机制不一样）。<br>如果发送失败的消息，重新发送，会将此消息的位置挪到会话窗口的最低端。（和微信的机制一致）<br>基于这样的交互设计，倾向选择上述的方案二进行发送失败消息的存储。</p>
+<p>数据存储方案：</p>
+<p> 基于现有，拉历史消息的机制，因为model层会通过本地数据库拉取消息的条数，确认本地数据库空缺的消息，再去网络进行消息的拉取。通过条数对比本地消息是否已满，如果将发送失败消息以及成功的历史消息都存储到一张表中，将影响现有的机制。<br>所以设计有一张表t_unsend_msg存储发送失败的消息，消息的msgId为负数，区别于我们正常的msgId，并且此消息的key为前一条发送成功消息的(sessId+msgId),这样可以确认消息在会话中显示的位置。</p>
+<ol start="3">
+<li><p>同一条发送成功的消息，后面有跟着多条发送失败的消息，可以通过比较伪造的msgId的绝对值进行排序。</p>
+</li>
+<li><p>最终的就是在拉最近会话满了后，需要查询t_unsend_msg此会话是否有发送失败的消息，如果有，则将在此会话区内没发送失败的消息插入此次拉取的会话。</p>
+</li>
+</ol>
+<p>界面逻辑交互方案：</p>
+<p> 消息发送失败，在消息旁边显示感叹号。<br>在不同会话之间切换窗口之间切换，不进行弹窗的提醒。<br>加载一个会话，如果会话有发送失败的消息，将此消息插入到用户当时发送的上下文位置。不将发送失败的消息捞到会话的最低端。（和现在pc的机制不一样）。<br>如果发送失败的消息，重新发送，会将此消息的位置挪到会话窗口的最低端。（和pc一致）<br>如果文件或者图片发送失败，但点击重发还是发送失败（可能本地存储的文件和图片被删除了）。则仍然在原来的位置显示，右键菜单只显示删除选项。<br>发送失败的消息，不在最近会话列表显示。（需要产品确认）<br>发送失败的消息，不在历史消息列表显示。（需要产品确认）</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/08/25/27-安装qtcreator代码风格插件/" class="prev">上一篇：27-安装qtcreator代码风格插件</a>
+    
+    
+    <a href="/2019/06/06/29-程序架构说明/" class="next">下一篇：客户端程序架构说明</a>
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

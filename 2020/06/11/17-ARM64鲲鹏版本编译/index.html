@@ -4,22 +4,19 @@
   <meta charset="utf-8">
   <link rel="dns-prefetch" href="https://disda.github.io">
   
-  <title>关于 | Hexo</title>
+  <title>ARM64鲲鹏版本编译 | Hexo</title>
   <meta name="author" content="彭家达(disda)">
   
-  <meta name="description" content="个人简介我叫彭家达，熟悉c/c++,Qt以及会一些前端
-工作经历
-2018/10 ~ 2020/12 珠海信达九州科技有限公司，负责有度即时通跨平台客户端的开发工作以及国产化Linux客户端相关适配工作
+  <meta name="description" content="下载官方qt镜像(arm64) 参见上一篇文章
 
-教育经历
-2014/9 ~ 2018/7 西安邮电大学通信工程专业
+切换默认编译器为gcc g++，不要使用clang和chang++，否则会出现很多莫名的错误无从排查。
 
-联系方式微信号：peng">
+依次编译依赖库openssl,curl protobuf 可参考 （https://www.huaweicloud.com/kunpeng/so">
   
   
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-  <meta property="og:title" content="关于"/>
+  <meta property="og:title" content="ARM64鲲鹏版本编译"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -88,11 +85,11 @@
       
 <div class="date">
 
-<time datetime="2018-12-05T16:21:50.000Z"
+<time datetime="2020-06-11T05:28:29.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2018-12-06
+  2020-06-11
 </time>
 
 
@@ -103,27 +100,37 @@
 
     </div>
   
-  <h1 class="title" itemprop="name">关于</h1>
+  <h1 class="title" itemprop="name">ARM64鲲鹏版本编译</h1>
   <div class="entry-content" itemprop="articleBody">
     
-    <div class="post-toc">
-      <div class="toc-title">TOC</div>
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">个人简介</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%BB%8F%E5%8E%86"><span class="toc-number"></span> <span class="toc-text">工作经历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%99%E8%82%B2%E7%BB%8F%E5%8E%86"><span class="toc-number"></span> <span class="toc-text">教育经历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">联系方式</span></a>
-    </div>
-    
-    <h4 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h4><p>我叫彭家达，熟悉c/c++,Qt以及会一些前端</p>
-<h3 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h3><ul>
-<li>2018/10 ~ 2020/12 珠海信达九州科技有限公司，负责有度即时通跨平台客户端的开发工作以及国产化Linux客户端相关适配工作</li>
-</ul>
-<h3 id="教育经历"><a href="#教育经历" class="headerlink" title="教育经历"></a>教育经历</h3><ul>
-<li>2014/9 ~ 2018/7 西安邮电大学通信工程专业</li>
-</ul>
-<h3 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h3><p>微信号：pengjiada123<br>qq号：<a href="mailto:&#53;&#57;&#x33;&#x32;&#49;&#55;&#52;&#x33;&#57;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;">&#53;&#57;&#x33;&#x32;&#49;&#55;&#52;&#x33;&#57;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;</a></p>
+    <ol>
+<li><p>下载官方qt镜像(arm64) 参见上一篇文章</p>
+</li>
+<li><p>切换默认编译器为gcc g++，不要使用clang和chang++，否则会出现很多莫名的错误无从排查。</p>
+</li>
+<li><p>依次编译依赖库openssl,curl protobuf 可参考 （<a target="_blank" rel="noopener" href="https://www.huaweicloud.com/kunpeng/software.html%EF%BC%89">https://www.huaweicloud.com/kunpeng/software.html）</a></p>
+</li>
+<li><p>编译nopoll由于网上下载源码编译移植出现syntax error near unexpected token `<em>-</em>-beos*’ nopoll错误并尝试无法解决，要来了移动端的nopoll源码库继承到qt工程中编译，解决。</p>
+</li>
+<li><p>安装的breakpad,ciphersqlite无法编译由于缺少qt的private目录，故屏蔽</p>
+</li>
+<li><p>Error initalizing NSS without a persistent database:NSS error code: -5925 解决：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c4ea71d516df">https://www.jianshu.com/p/c4ea71d516df</a></p>
+</li>
+</ol>
 
   </div>
 
 </article>
 
+
+  <nav id="pagenavi">
+    
+    <a href="/2020/08/10/34-截图支持wayland桌面/" class="prev">上一篇：34-截图支持wayland桌面</a>
+    
+    
+    <a href="/2020/06/03/03-Linux下QtCreator输入中文问题也可以解决打的包无法输入中文问题-md/" class="next">下一篇：Linux下QtCreator输入中文问题也可以解决打的包无法输入中文问题</a>
+    
+  </nav>
 
         </div>
         

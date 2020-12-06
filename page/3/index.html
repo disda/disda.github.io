@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <link rel="dns-prefetch" href="https://disda.github.io">
   
-  <title>Hexo</title>
+  <title>page | Hexo</title>
   <meta name="author" content="彭家达(disda)">
   
   
@@ -78,22 +78,24 @@
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/12/06/28-QtCreator使用技巧/" itemprop="url">28-QtCreator使用技巧</a>
+    <a href="/2020/03/12/35-模板类不能导出/" itemprop="url">CPP模板类不能导出</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      ...
-      <a href="/2020/12/06/28-QtCreator使用技巧/" class="more-link">
+      问题：
+集成libFramelessWindow和eventbus的过程中在linux平台能够正确的链接到，到时window平台则显示如下错误：
+browserwindow.obj:-1: error: LNK2019: 无法解析的外部符号 “__declspec(dllimport) public: void __thiscall MuShadowWindow::setClientWidget ...
+      <a href="/2020/03/12/35-模板类不能导出/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
           
 <div class="date">
 
-<time datetime="2020-12-06T05:42:35.000Z"
+<time datetime="2020-03-12T05:46:57.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2020-12-06
+  2020-03-12
 </time>
 
 
@@ -113,23 +115,25 @@
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/12/06/25-学习分享会总结/" itemprop="url">学习分享会总结</a>
+    <a href="/2020/02/05/12-window安装包-Inno-Setup/" itemprop="url">12-window安装包-Inno_Setup</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      1、QT第一次学习（2019-07-10）学习内容主要包括：https://www.bilibili.com/video/av24374568/?p=3基本的qt主函数结构、消息机制及信号槽机制。sean总结：
-首先需要添加一个Q_OBJECT宏定义，该宏定义可以让该类具有信号槽的功能，要正确的处理信号和槽，必须借助一个称为moc（Meta Object Compiler）的QT工具，MOC工具 ...
-      <a href="/2020/12/06/25-学习分享会总结/" class="more-link">
+      
+下载安装innosetup-6.0.3  https://www.jrsoftware.org/isdl.phpbuild youduqt release版本在youduqt.exe文件下cmd执行windeployqt.exe youduqt.exe，这样会将相应的依赖库放到与youduqt.exe相应的目录下。
+
+新建安装包脚本youduqt.iss 添加安装语言添加图标默认没有中文简体和 ...
+      <a href="/2020/02/05/12-window安装包-Inno-Setup/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
           
 <div class="date">
 
-<time datetime="2020-12-06T05:40:48.000Z"
+<time datetime="2020-02-05T06:15:12.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2020-12-06
+  2020-02-05
 </time>
 
 
@@ -149,23 +153,30 @@
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/12/06/24-在windows下面像objective_C那样多线程编程/" itemprop="url">(转)在windows下面像objective_C那样多线程编程</a>
+    <a href="/2020/02/04/11-window版本编译问题/" itemprop="url">11-window版本编译问题</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      在iOS开发中，多线程编程非常方便，下面的例子，显示的就是一个在线程内下载图片，下载完成后在主线程显示该图片：
-12345678910dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;    NSURL * url &#x3D; [NSURL URLWithString:@&q ...
-      <a href="/2020/12/06/24-在windows下面像objective_C那样多线程编程/" class="more-link">
+      
+ 处理跨平台不兼容代码，以及各种编译错误
+
+ 编译依赖库window版本
+
+
+需要编译处依赖库的MDd(debug)版本以及MD(release)版本,如果需要遇到一下错误，主要原因为qtcreator编译出来的库没有设置好debug和release的区别。
+可以使用vs打开pro工程分别编译degbu和release版本放到相应的目录下。
+正确的做法：其实就是之前的pro文件配置的不正确，应 ...
+      <a href="/2020/02/04/11-window版本编译问题/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
           
 <div class="date">
 
-<time datetime="2020-12-06T05:39:30.000Z"
+<time datetime="2020-02-04T05:22:33.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2020-12-06
+  2020-02-04
 </time>
 
 
@@ -185,22 +196,22 @@
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/12/06/21-QWebEngineView总结/" itemprop="url">21-QWebEngineView总结</a>
+    <a href="/2020/01/21/23-window下编码问题/" itemprop="url">Windows下编码问题</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      ...
-      <a href="/2020/12/06/21-QWebEngineView总结/" class="more-link">
+      编码历程概念：计算机存储二进制，8个二进制位一个字节。一个字节可以表示为0 ~255之间的任何一个数字。文件，本质就是一串0 ~ 255的数字，这个序列为字节流。最初因为英文字母很少，一个字节就可以全部囊括。因此美国人最初发明了ASCII的字符编码。但是小语种很多，远远超过256所能容纳的数量。作为亚洲语言的代表，中日韩语言中所使用的汉字，仅仅常用的就达数千。而截至清朝，《康熙字典》已经收录了汉 ...
+      <a href="/2020/01/21/23-window下编码问题/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
           
 <div class="date">
 
-<time datetime="2020-12-06T05:38:04.000Z"
+<time datetime="2020-01-21T05:38:58.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2020-12-06
+  2020-01-21
 </time>
 
 
@@ -220,22 +231,23 @@
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/12/06/20-qt学习资料/" itemprop="url">20-qt学习资料</a>
+    <a href="/2019/12/27/33-消息转发/" itemprop="url">消息转发方案</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      ...
-      <a href="/2020/12/06/20-qt学习资料/" class="more-link">
+      转发详情窗口文件存储方案：
+一、直接在t_file表增加subMsgId，把sessId,msgId的主键去掉，将sessId, msgId, subMsgId设置为主键。二、增加一张t_sub_file，把sessId,msgId,subMsgId, fileId,fileName，转发消息的localfileInfo独立存在这里。三、t_file独立为一个实体，t_msg_file和t_ms ...
+      <a href="/2019/12/27/33-消息转发/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
           
 <div class="date">
 
-<time datetime="2020-12-06T05:37:37.000Z"
+<time datetime="2019-12-27T05:45:17.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2020-12-06
+  2019-12-27
 </time>
 
 
@@ -255,26 +267,22 @@
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/12/06/09-符号文件的生成/" itemprop="url">符号文件的生成</a>
+    <a href="/2019/10/24/08-qt自动打包说明文档/" itemprop="url">qt自动打包说明文档</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      编译
-下载google-breakpad 在25上有一份(/dailybuild/linux_qt/package/breakpad.zip)
-
--2.svn checkout http://google-breakpad.googlecode.com/svn/trunk/ google-breakpad-read-only3. ./configuremakesudo make install
- ...
-      <a href="/2020/12/06/09-符号文件的生成/" class="more-link">
+      一、打包前的环境准备：python2及python3的安装（如果少模块请自行安装）设置同步目录根据电脑的情况设置const.py文件里的全局变量git安装及账号配置rpmbuild的安装linuxdeployqt的下载（注意：下载发行版5，防止出现新版（6版本及更新）生成默认桌面文件时报错）及添入环境变量获取git的linux-qt代码（最好从25拿，有现成编译好的依赖库）编译依赖库（根据 th ...
+      <a href="/2019/10/24/08-qt自动打包说明文档/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
           
 <div class="date">
 
-<time datetime="2020-12-06T05:21:32.000Z"
+<time datetime="2019-10-24T05:19:59.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2020-12-06
+  2019-10-24
 </time>
 
 
@@ -294,22 +302,23 @@
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/12/06/06-在deepin上打neokeylin的rpm包/" itemprop="url">06-在deepin上打neokeylin的rpm包</a>
+    <a href="/2019/09/27/32-字符编码问题/" itemprop="url">字符编码问题</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      ...
-      <a href="/2020/12/06/06-在deepin上打neokeylin的rpm包/" class="more-link">
+      问题：在调用原本window的工具类
+123456789101112131415161718192021222324252627282930void YDTrans2Pinyin::GetPinYin(unsigned char *chinese, string &amp;outPinyin) &#123;    int chinese_str_len = strlen((char *)chin ...
+      <a href="/2019/09/27/32-字符编码问题/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
           
 <div class="date">
 
-<time datetime="2020-12-06T05:18:55.000Z"
+<time datetime="2019-09-27T05:44:59.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2020-12-06
+  2019-09-27
 </time>
 
 
@@ -329,29 +338,22 @@
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/12/06/04-添加字体资源文件-md/" itemprop="url">添加字体资源文件</a>
+    <a href="/2019/09/26/07-中标麒麟龙芯版本编译/" itemprop="url">中标麒麟龙芯版本编译</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      
-下载字体资源文件，如MSYH.TTC（微软雅黑字体）
-在编译文件youdu.pro中添加CONFIG += resources_big配置，防止由于字体资源文件过大无法添加的问题。
-添加资源main.qrc文件，不要把字体资源文件和图片资源文件混在一个qrc文件
-调用YDUtils::LoadFontFromFile函数添加字体资源文件到程序
-main.cpp中加载字体
-
-...
-      <a href="/2020/12/06/04-添加字体资源文件-md/" class="more-link">
+      rpm安装包的目录结构：12345678910111213141516171819202122232425262728293031323334353637383940414243xinda@xinda:~/Desktop/youdu_rpm_bak/youdu-192.9.2$ tree ..├── opt│   └── youdu│   ├── version│   └── youdu├──  ...
+      <a href="/2019/09/26/07-中标麒麟龙芯版本编译/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
           
 <div class="date">
 
-<time datetime="2020-12-06T05:07:44.000Z"
+<time datetime="2019-09-26T05:19:18.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2020-12-06
+  2019-09-26
 </time>
 
 
@@ -371,25 +373,23 @@ main.cpp中加载字体
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/11/07/10-crashdump查看/" itemprop="url">crashdump查看</a>
+    <a href="/2019/09/17/02-Linux平台打包AppImage格式的可执行文件-md/" itemprop="url">Linux平台打包AppImage格式的可执行文件</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      
-生成crash符号文件python2.7 symbolstore.py /usr/local/bin/dump_syms ./youdu-sym/ ./youduqt
-youdu-sym 和 *.dmp文件在同一个目录下，minidump_stackwalk 7c46b3ba-5092-4799-7079e944-435e2b0b.dmp ./youdu-sym/即可查看crash的堆栈信息
- ...
-      <a href="/2020/11/07/10-crashdump查看/" class="more-link">
+      打包发布程序Qt linux(ubuntu) 下用 linuxdeployqt 打包发布程序(AppImage可执行文件)
+下载linuxdeployqt把下载的文件放入 /usr/local/bin 内，并执行如下命令使其可以运行chmod 777 linuxdeployqt把qmake的路径添加到环境变量中sudo vim /etc/profile在文件末尾添加：export PATH=”/ ...
+      <a href="/2019/09/17/02-Linux平台打包AppImage格式的可执行文件-md/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
           
 <div class="date">
 
-<time datetime="2020-11-07T05:22:06.000Z"
+<time datetime="2019-09-17T05:03:12.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2020-11-07
+  2019-09-17
 </time>
 
 
@@ -409,27 +409,27 @@ youdu-sym 和 *.dmp文件在同一个目录下，minidump_stackwalk 7c46b3ba-509
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/10/28/19-Mac-QT版本打包/" itemprop="url">Mac-QT版本打包</a>
+    <a href="/2019/09/16/01-Linux平台编译和遇到的问题-md/" itemprop="url">Linux平台编译和遇到的问题</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      
-编译依赖库，jgapi，以及release版本
+      Linux平台编译及遇到的问题一. 环境搭建步骤
+安装 qt-opensource-linux-x64-5.7.1.run
+安装 gcc，g++
+数据库加密驱动编译 QtCipherSqlitePlugin 生成 libsqlitecipher.so (25上也有), 并拷贝到 /home/xinda/Qt5.7.1/5.7/gcc_64/plugins/sqldrivers中。
 
-在相应的工程中，update工程的qmake中添加CONFIG -= app_bundle，同样在meeting工程中添加CONFIG -= app_bundle，这个语句的作用就是将程序生成为exec文件而非Mac的app可执行文件
-
-在youduqt的主工程中添加CONFIG += app_bundle，这样工程编译就会生成youduqt的 ...
-      <a href="/2020/10/28/19-Mac-QT版本打包/" class="more-link">
+二. 编译时 ...
+      <a href="/2019/09/16/01-Linux平台编译和遇到的问题-md/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
           
 <div class="date">
 
-<time datetime="2020-10-28T05:37:11.000Z"
+<time datetime="2019-09-16T04:56:29.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2020-10-28
+  2019-09-16
 </time>
 
 
@@ -450,8 +450,10 @@ youdu-sym 和 *.dmp文件在同一个目录下，minidump_stackwalk 7c46b3ba-509
 
 <nav id="pagenavi">
   
+  <a href="/page/2/" class="prev">上一页</a>
   
-  <a href="/page/2/" class="next">下一页</a>
+  
+  <a href="/page/4/" class="next">下一页</a>
   
 </nav>
         </div>

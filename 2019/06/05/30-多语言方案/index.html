@@ -4,22 +4,20 @@
   <meta charset="utf-8">
   <link rel="dns-prefetch" href="https://disda.github.io">
   
-  <title>关于 | Hexo</title>
+  <title>Qt多语言方案 | Hexo</title>
   <meta name="author" content="彭家达(disda)">
   
-  <meta name="description" content="个人简介我叫彭家达，熟悉c/c++,Qt以及会一些前端
-工作经历
-2018/10 ~ 2020/12 珠海信达九州科技有限公司，负责有度即时通跨平台客户端的开发工作以及国产化Linux客户端相关适配工作
+  <meta name="description" content="概要
+利用tr()函数实现多语言软件方案是Qt提供的一套较为完善方案。所以我们使用QObject::tr()函数来包含应用程序中需要翻译的字符串。
+tr()函数的作用
 
-教育经历
-2014/9 ~ 2018/7 西安邮电大学通信工程专业
-
-联系方式微信号：peng">
+它使得Qt的lupdate工具可以提取所有课翻译的字符串文字
+如果翻译文件可用，并且该语言已被选中，该函数就会返回翻译后的字符串。">
   
   
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-  <meta property="og:title" content="关于"/>
+  <meta property="og:title" content="Qt多语言方案"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -88,11 +86,11 @@
       
 <div class="date">
 
-<time datetime="2018-12-05T16:21:50.000Z"
+<time datetime="2019-06-05T05:43:51.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2018-12-06
+  2019-06-05
 </time>
 
 
@@ -103,27 +101,41 @@
 
     </div>
   
-  <h1 class="title" itemprop="name">关于</h1>
+  <h1 class="title" itemprop="name">Qt多语言方案</h1>
   <div class="entry-content" itemprop="articleBody">
     
-    <div class="post-toc">
-      <div class="toc-title">TOC</div>
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">个人简介</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%BB%8F%E5%8E%86"><span class="toc-number"></span> <span class="toc-text">工作经历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%99%E8%82%B2%E7%BB%8F%E5%8E%86"><span class="toc-number"></span> <span class="toc-text">教育经历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">联系方式</span></a>
-    </div>
-    
-    <h4 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h4><p>我叫彭家达，熟悉c/c++,Qt以及会一些前端</p>
-<h3 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h3><ul>
-<li>2018/10 ~ 2020/12 珠海信达九州科技有限公司，负责有度即时通跨平台客户端的开发工作以及国产化Linux客户端相关适配工作</li>
-</ul>
-<h3 id="教育经历"><a href="#教育经历" class="headerlink" title="教育经历"></a>教育经历</h3><ul>
-<li>2014/9 ~ 2018/7 西安邮电大学通信工程专业</li>
-</ul>
-<h3 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h3><p>微信号：pengjiada123<br>qq号：<a href="mailto:&#53;&#57;&#x33;&#x32;&#49;&#55;&#52;&#x33;&#57;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;">&#53;&#57;&#x33;&#x32;&#49;&#55;&#52;&#x33;&#57;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;</a></p>
+    <p>概要</p>
+<p>利用tr()函数实现多语言软件方案是Qt提供的一套较为完善方案。<br>所以我们使用QObject::tr()函数来包含应用程序中需要翻译的字符串。</p>
+<p>tr()函数的作用</p>
+<ol>
+<li>它使得Qt的lupdate工具可以提取所有课翻译的字符串文字</li>
+<li>如果翻译文件可用，并且该语言已被选中，该函数就会返回翻译后的字符串。</li>
+</ol>
+<p>主要步骤</p>
+<ol>
+<li>lupdate将扫描.ui文件和C++文件中可供翻译的字符串。生成一个ts文件。</li>
+<li>linguist编辑.ts文件并让用户可以进行翻译工作。</li>
+<li>lrelease读取.ts文件并生成qm文件，他们可以用来载入翻译。</li>
+</ol>
+<p>Linux平台下的操作<br>更新ts文件: Tools-&gt;External-&gt;Linguist-&gt;Update Translations<br>生成src/youduqt/zh.ts，src/youduqt/en.ts。在工程目录Other files/translations。</p>
+<p> 更新qm文件: Tools-&gt;External-&gt;Linguist-&gt;Release Translations<br>直接点击菜单按钮，提示错误:</p>
+<p>Starting external tool “/home/xinda/Qt5.7.1/5.7/gcc_64/bin/lrelease” /home/xinda/qt-linux-git/src/youduqt.pro<br>lrelease warning: Met no ‘TRANSLATIONS’ entry in project file ‘/home/xinda/qt-linux-git/src/youduqt.pro’<br>“/home/xinda/Qt5.7.1/5.7/gcc_64/bin/lrelease” finished</p>
+<p>可能是多工程项目的原因:<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/bing_lee/article/details/87714270">https://blog.csdn.net/bing_lee/article/details/87714270</a></p>
+<p>可以手动编译子工程pro生成qm文件:<br>lrelease youduqt/youduqt.pro</p>
 
   </div>
 
 </article>
 
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/06/06/29-程序架构说明/" class="prev">上一篇：客户端程序架构说明</a>
+    
+    
+    <a href="/2019/06/05/26-Qt编码规范/" class="next">下一篇：Qt编码规范</a>
+    
+  </nav>
 
         </div>
         

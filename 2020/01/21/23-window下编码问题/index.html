@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>Windows下编码问题 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="编码历程概念：计算机存储二进制，8个二进制位一个字节。一个字节可以表示为0 ~255之间的任何一个数字。文件，本质就是一串0 ~ 255的数字，这个序列为字节流。最初因为英文字母很少，一个字节就可以全部囊括。因此美国人最初发明了ASCII的字符编码。但是小语种很多，远远超过256所能容纳的数量。作为">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="Windows下编码问题"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2020-01-21T05:38:58.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2020-01-21
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">Windows下编码问题</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%8E%86%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">编码历程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">概念：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UCS-2-UTF-8-UTF-16%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.2.</span> <span class="toc-text">UCS-2,UTF-8,UTF-16的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Qt%E7%9B%B8%E5%85%B3"><span class="toc-number">1.3.</span> <span class="toc-text">Qt相关</span></a></li></ol></li></ol>
+    </div>
+    
+    <h3 id="编码历程"><a href="#编码历程" class="headerlink" title="编码历程"></a>编码历程</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><p>计算机存储二进制，8个二进制位一个字节。一个字节可以表示为0 ~255之间的任何一个数字。文件，本质就是一串0 ~ 255的数字，这个序列为字节流。<br>最初因为英文字母很少，一个字节就可以全部囊括。因此美国人最初发明了ASCII的字符编码。<br>但是小语种很多，远远超过256所能容纳的数量。作为亚洲语言的代表，中日韩语言中所使用的汉字，仅仅常用的就达数千。而截至清朝，《康熙字典》已经收录了汉字47000有余。<br>在美国人的 ASCII 编码系统中， 128 ～ 255 之间的数字几乎没有使用。而凡是小于等于 127 的数字，二进制表示中首位都是 0 ；大于等于 128 的数字，首位都是 1 。 这个特性很快被得到了运用。一般的想法是，在字节流中，如果出现大于等于 0x80 的字符，则被认为（可能）是多字节编码的「前导字节」，需要同下一个字节一起构成完整的「字符」。 凭借这个方法，各个国家先后制定了自己的「多字节编码规则」。比如简体中文第一个国家编码，就是 GB2312 。<br>但是如果各个国家的文字编码都不一致，这就导致不同国家之间交换信息变得很困难。<br>所以Unicode就诞生了: 20世纪80年代末，Unicode统一码联盟成立。1991年十月，发表了第一个Unicode标准，即Unicode 1.0.  2001年3月，Unicode 3.1 收录了超过65536个字符，正式由双字节扩展为四字节编码。2005年，Unicode 4.1收录了第十万个字符。2012年，Unicode6.1发布。</p>
+<h4 id="UCS-2-UTF-8-UTF-16的关系"><a href="#UCS-2-UTF-8-UTF-16的关系" class="headerlink" title="UCS-2,UTF-8,UTF-16的关系"></a>UCS-2,UTF-8,UTF-16的关系</h4><pre><code>              UCS-2: Unicode编码曾经只有65536个字符控件，用恒定的两个字节表示所有字符，这种编码方式被称为UCS-2。
+
+              UTF-16: 当Unicode字符超过65536之后，参考多字节编码，通过双字节扩展四字节的方式表示所有字符，这种编码方式被称为UTF-16.
+
+              UTF-8: 为了便于网络传输和数据，不至于遇到“\0”而错误的以为文本结束，以及兼容ASCII编码，UTF-8被定义，UTF-8的每个字符按照规则编码为1 ~4字节任一字节组合，中文通常为三字节。
+
+             如果直接使用4字节编码所有字符的编码方式，被称为UTF-32或者UCS-4
+
+  8. 在Unicode尚未成熟的年代，Window是使用多字节编码，来支持每个国家的语言的。自从WinNT发布后，Window内核Api改为使用UTF-16的编码方式，更好的支持多语言。由于历史原因，Windows任然保留多字节的Api，UTF-16的Api以W结尾，而多字节的编码以A结尾。           例如CreateWindowA,CreateWindowW.</code></pre>
+<h4 id="Qt相关"><a href="#Qt相关" class="headerlink" title="Qt相关"></a>Qt相关</h4><p>QString使用UTF-16<br>std::string本质就是字节数组，因此从const char* 转化为std::string 不会有问题。在中文环境下编码是GBK,在中文Windows上也没有什么问题。<br>Qt,从诞生开始就是国际化的项目，因此特别注重这些，在兼顾计算性能和存储性能之后，Qt小组决定使用UTF-16作为QString的编码格式。<br>建议</p>
+<p>在数据库和网络的json中绝大多数情况下是使用UTF-8编码的。<br>但是Window的APi只支持Unicode和Ansi，因此可以知道在window代码中这些函数的作用，就是因为Window的Api支持Ansi和Unicode。<br>应该我们在windows下编程：<br>ansi与unicode互转<br>utf8与unicode互转<br>ansi与utf8互转</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2020/02/04/11-window版本编译问题/" class="prev">上一篇：11-window版本编译问题</a>
+    
+    
+    <a href="/2019/12/27/33-消息转发/" class="next">下一篇：消息转发方案</a>
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>page | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <div class="article-list-wrap">
+  
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/08/27/05-deepin上打包deb包/" itemprop="url">05-deepin上打包deb包</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      ，首先建立一个目录结构如下的
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748xinda@xinda:~/Downloads$ tree youdu-qt_192.8.14_amd64youdu-qt_192.8.14_amd64├── data│   └── usr│  ...
+      <a href="/2019/08/27/05-deepin上打包deb包/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-08-27T05:10:37.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-08-27
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/08/25/27-安装qtcreator代码风格插件/" itemprop="url">27-安装qtcreator代码风格插件</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      1 . 在Help→About plugins安装代码格式的beautifer插件2. 重启qtcreator3. Tool→Option 选择Beautifier4. 配置5. 配置内容–style=attach–indent=spaces=4–align-pointer=name–align-reference=name–convert-tabs–attach-namespaces–max- ...
+      <a href="/2019/08/25/27-安装qtcreator代码风格插件/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-08-25T05:41:50.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-08-25
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/07/13/31-消息重发机制方案/" itemprop="url">31-消息重发机制方案</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      场景:
+ 用户在消息4，和消息5之间发送一条消息失败了，这时这条消息应该怎么进行存储，让用户在窗口下次打开的时候重新发送消息。
+逻辑交互方案确定：
+ 消息发送失败，在消息旁边显示感叹号。在不同会话之间切换窗口之间切换，不进行弹窗的提醒。加载一个会话，如果会话有发送失败的消息，将此消息插入到用户当时发送的上下文位置（和现在pc的机制不一样）。如果发送失败的消息，重新发送，会将此消息的位置挪到会话窗 ...
+      <a href="/2019/07/13/31-消息重发机制方案/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-07-13T05:44:21.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-07-13
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/06/06/29-程序架构说明/" itemprop="url">客户端程序架构说明</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      一. 程序架构
+主要分为 youduqt 和 jgapi 两部分。
+1.1 youduqt采用MVC模式，包括界面功能，业务逻辑，数据存储，网络通信。
+1.2 jgapi主要实现登录帐号信息存储、与服务器的网络通信：信息存储采用的是KvStore，包括登录的帐号信息，各个服务的DNS地址。网络通信采用的是标准http, https协议，加密通道放在协议层。短连接https的数据请求，将标准的ht ...
+      <a href="/2019/06/06/29-程序架构说明/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-06-06T05:43:10.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-06-06
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/06/05/30-多语言方案/" itemprop="url">Qt多语言方案</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      概要
+利用tr()函数实现多语言软件方案是Qt提供的一套较为完善方案。所以我们使用QObject::tr()函数来包含应用程序中需要翻译的字符串。
+tr()函数的作用
+
+它使得Qt的lupdate工具可以提取所有课翻译的字符串文字
+如果翻译文件可用，并且该语言已被选中，该函数就会返回翻译后的字符串。
+
+主要步骤
+
+lupdate将扫描.ui文件和C++文件中可供翻译的字符串。生成一个ts文件。
+ ...
+      <a href="/2019/06/05/30-多语言方案/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-06-05T05:43:51.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-06-05
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/06/05/26-Qt编码规范/" itemprop="url">Qt编码规范</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      概要大部分遵循我们原本pc下的代码规范。但是对于现新开展的Qt项目，因为和我们现有的duilib的PC项目还是有区别的。所以有一下几点要求，希望大家进行遵循，没有什么坏处。如果大家还有其他合理的能提高我们代码质量的，可以继续添加。
+命名总结
+
+变量名/函数名采用驼峰命名法(lowerCaseCamel), 首字母缩写词出现的命名中, 缩写也用驼峰命名。
+
+short counter;char i ...
+      <a href="/2019/06/05/26-Qt编码规范/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-06-05T05:41:20.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-06-05
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+</div>
+
+<nav id="pagenavi">
+  
+  <a href="/page/3/" class="prev">上一页</a>
+  
+  
+</nav>
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

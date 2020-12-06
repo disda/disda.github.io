@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>客户端程序架构说明 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="一. 程序架构
+主要分为 youduqt 和 jgapi 两部分。
+1.1 youduqt采用MVC模式，包括界面功能，业务逻辑，数据存储，网络通信。
+1.2 jgapi主要实现登录帐号信息存储、与服务器的网络通信：信息存储采用的是KvStore，包括登录的帐号信息，各个服务的DNS地址。网络通信采">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="客户端程序架构说明"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-06-06T05:43:10.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-06-06
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">客户端程序架构说明</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <p>一. 程序架构</p>
+<p>主要分为 youduqt 和 jgapi 两部分。</p>
+<p>1.1 youduqt采用MVC模式，包括界面功能，业务逻辑，数据存储，网络通信。</p>
+<p>1.2 jgapi主要实现登录帐号信息存储、与服务器的网络通信：<br>信息存储采用的是KvStore，包括登录的帐号信息，各个服务的DNS地址。<br>网络通信采用的是标准http, https协议，加密通道放在协议层。短连接https的数据请求，将标准的http body分为youdu header和youdu body。用于拉取会话信息、消息记录，组织架构、配置信息等。长连接使用TLS Socket，保证数据传输的安全性。用于用户登录，新消息通知、用户状态改变通知、事件通知等。<br>二. 目录结构</p>
+<p> .<br>├── README.md<br>├── src<br>│   ├── deps<br>│   ├── jgapi<br>│   ├── Makefile<br>│   ├── update<br>│   ├── utils<br>│   ├── youduqt<br>│   │   ├── 300_050.ico<br>│   │   ├── api<br>│   │   ├── data<br>│   │   ├── main.cpp<br>│   │   ├── Makefile<br>│   │   ├── model<br>│   │   ├── readme.md<br>│   │   ├── resource.h<br>│   │   ├── translations<br>│   │   ├── ui<br>│   │   ├── ydutils<br>│   │   ├── youduqt.pri<br>│   │   ├── youduqt.pro<br>│   │   ├── youduqt.pro.user<br>│   │   ├── youduqt.rc<br>│   │   ├── youduqt.vcxproj<br>│   │   ├── youduqt.vcxproj.filters<br>│   │   └── youduqt.vcxproj.user<br>│   ├── youduqt.pro<br>│   └── youduqt.pro.user<br>├── resources<br>│   ├── AboutWnd<br>│   ├── Common<br>│   ├── Emoji<br>│   ├── IMWnd<br>│   ├── LoginWnd<br>│   ├── mainwidget<br>│   ├── MainWnd<br>│   ├── mulaccountlogin<br>│   ├── settingWnd<br>│   ├── WorkspaceWnd<br>│   └── youduwindowqt.qrc<br>└── thrid_part<br>├── build-guide.md<br>├── cppformat<br>├── curl-7.39.0<br>├── nghttp2<br>├── nopoll<br>├── openssl-OpenSSL_1_0_1g<br>├── protobuf-2.6.1<br>├── QtCipherSqlitePlugin<br>└── zlib-1.2.11</p>
+<p>三. 数据存储<br>数据存储主要使用了SQLite数据库和QSettings配置文件。</p>
+<p>3.1 SQLite 数据库</p>
+<p>采用的是sqlite3数据库加密存储，用于存放会话信息，消息记录，组织架构等。加密采用的是一个Qt插件 QtCipherSqlitePlugin，它基于SQLite源和wxWidget中的wxSQLite3。</p>
+<p>3.2 QSettings 配置文件<br>采用Qt提供的持久跨平台QSettings读写配置文件。</p>
+<p>QSettings settings(“MySoft”, “Star Runner”);<br>QColor color = settings.value(“DataPump/bgcolor”).value<QColor>();</p>
+<p>QSettings settings(“MySoft”, “Star Runner”);<br>QColor color = palette().background().color();<br>settings.setValue(“DataPump/bgcolor”, color);</p>
+<p>四. 线程模型<br>Qt有两种多线程的方法，其中一种是继承QThread的run函数，另外一种是把一个继承于QObject的类转移到一个Thread里。有度Qt采用的是第一种，继承QThread的多线程方案。</p>
+<p>参考为知笔记对QThread的封装， 在Windows下面像Objective C那样多线程编程。实现有度Qt版本的线程模型。</p>
+<p>总共有1条主线程，1条特殊线程（mainloop），4条Model层的工作线程，多条数据库线程（一个数据库独立一条），1条日志线程，1条下载头像的线程。</p>
+<p>在main函数中，调用函数YDQueuedThreadsInit初始化多条线程：</p>
+<p>void YDQueuedThreadsInit()<br>{<br>    CYDQueuedThreads::getThreadPool(YD_THREAD_MAIN);<br>    CYDQueuedThreads::getThreadPool(YD_THREAD_DEFAULT, 4);<br>    CYDQueuedThreads::getThreadPool(YD_THREAD_WORK, 4);<br>}</p>
+<p>View与Controller层通常在主线程中运行。当与Model层交互时，在Controller中切换到Model的工作线程，Model层处理完成时，切换回主线程，View层展示结果。例如：</p>
+<p>void YDRecentSessController::InitSessionList() {<br>    ydApp-&gt;GetMainFrmController()-&gt;GetMainFrmWnd()-&gt;ShowLoading();<br>    YDExecuteOnWorkThread(<a href="">=</a>{<br>        YDSessionInfoList localList;<br>        YDSessionModel::Instance()-&gt;GetRecentSessListFromLocal(localList);<br>        YDExecuteOnMainThread(<a href="">=</a>{<br>            _refreshRecentSessList(localList);<br>        });<br>    });<br>}</p>
+<p>参考：</p>
+<p>1.继承QThread的多线程使用方法 <a target="_blank" rel="noopener" href="https://blog.csdn.net/czyt1988/article/details/64441443">https://blog.csdn.net/czyt1988/article/details/64441443</a></p>
+<p>2.继承QObject的多线程使用方法 <a target="_blank" rel="noopener" href="https://blog.csdn.net/czyt1988/article/details/71194457">https://blog.csdn.net/czyt1988/article/details/71194457</a></p>
+<p>五. 网络通信</p>
+<p>有度网络通信采用的是标准http, https协议，加密通道放在协议层。</p>
+<p>短连接https的数据请求，将标准的http body分为youdu header和youdu body。用于拉取会话信息、消息记录，组织架构、配置信息等。</p>
+<p>长连接使用TLS Socket，保证数据传输的安全性。用于用户登录，新消息通知、用户状态改变通知、事件通知等。</p>
+<p>5.1数据请求<br>http通信接口全部采用post方式。主要以json协议格式通信，文件传输辅以multiform。</p>
+<p>5.1.1 请求格式<br>请求方式：POST</p>
+<p>HTTP请求头：</p>
+<p>Content-Type:”application/json”(json格式),”multipart/form-data;…” (文件表单格式)<br>Accept-Encoding:”gzip”<br>json内容格式：</p>
+<p>{<br>    “header”: {<br>        “requestId”: “{4DE66F40-7D6F-4800-AFE6-DBF5E5F8E597}”,<br>        “timestamp”: 1428550256,<br>        “token”: “offer_yourself”<br>    },<br>    {key1}: {value1},<br>    {key2}: {value2}<br>}<br>{key}-{value}允许多个，取决于服务端发布的协议<br>multipart格式：</p>
+<p>需包含3个必填字段 requestId、token、timestamp，所有上传的文件需先压缩。</p>
+<p>5.1.2 JSON响应格式<br>HTTP响应头：</p>
+<p>Content-Type:”application/json”<br>Content-Encoding:(可选,编码压缩方式)<br>Transfer-Encoding:(可选,分段传输)<br>内容格式：</p>
+<p>{<br>“status”: {<br>“code”: 0,<br>“message”: “Action completed successful”,<br>“createAt”: “2019-06-05 11:51:42”<br>}<br>}<br>code及{key}-{value}取决于服务端发布的协议<br>5.1.3 octet-stream响应格式<br>当请求文件下载时，若服务器成功并需要返回文件数据，此时响应为octet-stream格式。其响应内容为压缩的文件数据流。</p>
+<p>HTTP响应头:</p>
+<p>Content-Type:”application/octet-stream”<br>Content-Disposition: “attachment;fileName={文件名}”</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/07/13/31-消息重发机制方案/" class="prev">上一篇：31-消息重发机制方案</a>
+    
+    
+    <a href="/2019/06/05/30-多语言方案/" class="next">下一篇：Qt多语言方案</a>
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

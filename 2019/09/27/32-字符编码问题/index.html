@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>字符编码问题 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="问题：在调用原本window的工具类
+123456789101112131415161718192021222324252627282930void YDTrans2Pinyin::GetPinYin(unsigned char *chinese, string &amp;amp;outPinyin) &amp;#">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="字符编码问题"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-09-27T05:44:59.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-09-27
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">字符编码问题</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">问题：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">解决：</span></a></li></ol>
+    </div>
+    
+    <h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><p>在调用原本window的工具类</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">YDTrans2Pinyin::GetPinYin</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *chinese, <span class="built_in">string</span> &amp;outPinyin)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> chinese_str_len = <span class="built_in">strlen</span>((<span class="keyword">char</span> *)chinese);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chinese_str_len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (chinese[i] &gt; <span class="number">0</span> &amp;&amp; chinese[i] &lt; <span class="number">160</span>) &#123;</span><br><span class="line">            outPinyin += chinese[i];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//int ascii_code = Chinese[i]*256 + Chinese[i+1] - 256*256;</span></span><br><span class="line">            <span class="keyword">int</span> ascii_code = (chinese[i] - <span class="number">0xa0</span>) * <span class="number">100</span> + chinese[i + <span class="number">1</span>] - <span class="number">0xa0</span>;</span><br><span class="line">            ++i;</span><br><span class="line">            <span class="keyword">if</span> (ascii_code &lt; <span class="number">1601</span>) &#123; <span class="comment">//未知字符</span></span><br><span class="line">                outPinyin += <span class="string">&quot;?&quot;</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (ascii_code &gt; <span class="number">5589</span>) &#123; <span class="comment">//OtherCode</span></span><br><span class="line">                <span class="built_in">string</span> s;</span><br><span class="line">                GetOtherCodePinYin(ascii_code, s);</span><br><span class="line">                outPinyin += s;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">396</span>; j &gt;= <span class="number">0</span>; j--) &#123; <span class="comment">//区位码</span></span><br><span class="line">                <span class="keyword">if</span> (ascii_code &gt;= code_qw[j]) &#123;</span><br><span class="line">                    outPinyin += pinyin[j];</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>遇到问题：无法正确获取中文字符的拼音</p>
+<p>问题原因：此函数chinese传入的应该是gbk编码的字符，而QString则是utf-8；这样因为utf-8和gbk同一个字符的字符编码不一致导致无法获取中文字符的正确拼音；</p>
+<h3 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QString <span class="title">YDTrans2Pinyin::Match</span><span class="params">(QString chinese)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> py;</span><br><span class="line">    QTextCodec *utf8 = QTextCodec::codecForName(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">    QTextCodec::setCodecForLocale(utf8);</span><br><span class="line">    QTextCodec *gbk = QTextCodec::codecForName(<span class="string">&quot;gbk&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//utf8 -&gt; gbk</span></span><br><span class="line">    <span class="comment">//1. utf8 -&gt; unicode</span></span><br><span class="line">    QString strUnicode = utf8-&gt;toUnicode(chinese.toLocal8Bit().data());</span><br><span class="line">    <span class="comment">//2. unicode -&gt; gbk, 得到QByteArray</span></span><br><span class="line">    QByteArray gb_bytes = gbk-&gt;fromUnicode(strUnicode);</span><br><span class="line"></span><br><span class="line">    GetInstance()-&gt;GetPinYin((<span class="keyword">unsigned</span> <span class="keyword">char</span> *)gb_bytes.data(), py);</span><br><span class="line">    <span class="keyword">return</span> QString::fromStdString(py);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>在调用此函数前，应该完成utf-8到gbk的编码。</p>
+<p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hejinjing_tom_com/article/details/77780565">https://blog.csdn.net/hejinjing_tom_com/article/details/77780565</a></p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/10/24/08-qt自动打包说明文档/" class="prev">上一篇：qt自动打包说明文档</a>
+    
+    
+    <a href="/2019/09/26/07-中标麒麟龙芯版本编译/" class="next">下一篇：中标麒麟龙芯版本编译</a>
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

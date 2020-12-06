@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>中标麒麟龙芯版本编译 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="rpm安装包的目录结构：12345678910111213141516171819202122232425262728293031323334353637383940414243xinda@xinda:~/Desktop/youdu_rpm_bak/youdu-192.9.2$ tree ..├──">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="中标麒麟龙芯版本编译"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-09-26T05:19:18.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-09-26
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">中标麒麟龙芯版本编译</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#rpm%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">rpm安装包的目录结构：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-youdu-spec-%E7%9A%84%E6%96%87%E4%BB%B6%E4%B9%A6%E5%86%99"><span class="toc-number">2.</span> <span class="toc-text">2. youdu.spec 的文件书写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%89%A7%E8%A1%8C%E6%89%93%E5%8C%85"><span class="toc-number">3.</span> <span class="toc-text">4. 执行打包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-alien%E5%B7%A5%E5%85%B7%E7%9A%84%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">5. alien工具的的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">6. 参考资料：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%B3%A8%E6%84%8F"><span class="toc-number">6.</span> <span class="toc-text">7. 注意:</span></a></li></ol>
+    </div>
+    
+    <h3 id="rpm安装包的目录结构："><a href="#rpm安装包的目录结构：" class="headerlink" title="rpm安装包的目录结构："></a>rpm安装包的目录结构：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">xinda@xinda:~/Desktop/youdu_rpm_bak/youdu-192.9.2$ tree .</span><br><span class="line">.</span><br><span class="line">├── opt</span><br><span class="line">│   └── youdu</span><br><span class="line">│   ├── version</span><br><span class="line">│   └── youdu</span><br><span class="line">├── usr</span><br><span class="line">│   └── share</span><br><span class="line">│   ├── applications</span><br><span class="line">│   │   └── youdu.desktop</span><br><span class="line">│   └── icons</span><br><span class="line">│   └── hicolor</span><br><span class="line">│   ├── 1024x1024</span><br><span class="line">│   │   └── apps</span><br><span class="line">│   │   └── youdu.png</span><br><span class="line">│   ├── 128x128</span><br><span class="line">│   │   └── apps</span><br><span class="line">│   │   └── youdu.png</span><br><span class="line">│   ├── 16x16</span><br><span class="line">│   │   └── apps</span><br><span class="line">│   │   └── youdu.png</span><br><span class="line">│   ├── 24x24</span><br><span class="line">│   │   └── apps</span><br><span class="line">│   │   └── youdu.png</span><br><span class="line">│   ├── 256x256</span><br><span class="line">│   │   └── apps</span><br><span class="line">│   │   └── youdu.png</span><br><span class="line">│   ├── 32x32</span><br><span class="line">│   │   └── apps</span><br><span class="line">│   │   └── youdu.png</span><br><span class="line">│   ├── 48x48</span><br><span class="line">│   │   └── apps</span><br><span class="line">│   │   └── youdu.png</span><br><span class="line">│   ├── 512x512</span><br><span class="line">│   │   └── apps</span><br><span class="line">│   │   └── youdu.png</span><br><span class="line">│   ├── 64x64</span><br><span class="line">│   │   └── apps</span><br><span class="line">│   │   └── youdu.png</span><br><span class="line">│   └── 96x96</span><br><span class="line">│   └── apps</span><br><span class="line">│   └── youdu.png</span><br><span class="line">└── youdu-192.9.2-3.spec</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-youdu-spec-的文件书写"><a href="#2-youdu-spec-的文件书写" class="headerlink" title="2. youdu.spec 的文件书写"></a>2. youdu.spec 的文件书写</h3><p>Buildroot: /home/xinda/Desktop/youdu/youdu-192.9.2<br>Name: youdu<br>Version: 192.9.2<br>Release: 3<br>Summary: 有度即时通<br>License: unknown<br>Distribution: Red Hat<br>Group: Converted/</p>
+<p>%define _rpmdir ../<br>%define _rpmfilename %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm<br>%define _unpackaged_files_terminate_build 0</p>
+<p>%preun<br>pidof youdu<br>if [ $? -ne 1 ];then<br>echo “kill youdu”<br>pidof youdu | xargs kill -s 9<br>else<br>echo “no youdu”<br>fi<br>%description<br>有度即时通</p>
+<p>(Converted from a rpm package by alien version 8.95.)</p>
+<p>(Converted from a rpm package by alien version 8.95.)</p>
+<p>%files<br>“/opt/youdu/version”<br>“/opt/youdu/youdu”<br>“/usr/share/applications/youdu.desktop”<br>“/usr/share/icons/hicolor/1024x1024/apps/youdu.png”<br>“/usr/share/icons/hicolor/128x128/apps/youdu.png”<br>“/usr/share/icons/hicolor/16x16/apps/youdu.png”<br>“/usr/share/icons/hicolor/24x24/apps/youdu.png”<br>“/usr/share/icons/hicolor/256x256/apps/youdu.png”<br>“/usr/share/icons/hicolor/32x32/apps/youdu.png”<br>“/usr/share/icons/hicolor/48x48/apps/youdu.png”<br>“/usr/share/icons/hicolor/512x512/apps/youdu.png”<br>“/usr/share/icons/hicolor/64x64/apps/youdu.png”<br>“/usr/share/icons/hicolor/96x96/apps/youdu.png”</p>
+<p>===================================================</p>
+<p>说明： %preun标识为：卸载之前执行的脚本，这里只要是判断时候有youdu这个进程，如果有则kill掉。</p>
+<ol start="3">
+<li>desktop文件的书写</li>
+</ol>
+<p>[Desktop Entry]<br>Categories=Network;<br>Name=youdu<br>Name[zh_CN]=有度即时通<br>Name[zh_TW]=有度即時通<br>Comment=youdu<br>Comment[zh_CN]=有度即时通<br>Comment[zh_TW]=有度即時通</p>
+<p>Exec=”/opt/youdu/youdu” %U<br>Icon=youdu<br>MimeType=x-scheme-handler/youdu;<br>StartupWMClass=youdu<br>Terminal=false<br>Type=Application<br>X-Deepin-Vendor=user-custom</p>
+<p>=======================================================</p>
+<p>说明： 主要为桌面快捷方式</p>
+<h3 id="4-执行打包"><a href="#4-执行打包" class="headerlink" title="4. 执行打包"></a>4. 执行打包</h3><p>sudo rpmbuild –buildroot /home/xinda/Desktop/youdu-192.9.2/ -bb youdu-192.9.2-4.spec</p>
+<p>在youdu-192.9.2的目录下 执行此命令即可完成打包</p>
+<h3 id="5-alien工具的的使用"><a href="#5-alien工具的的使用" class="headerlink" title="5. alien工具的的使用"></a>5. alien工具的的使用</h3><p>sudo apt-get install alien 安装命令行</p>
+<p>sudo alien -r -g -v ***.rpm 可以把查看rpm的安装包内容</p>
+<p>sudo alien –to-deb, –to-rpm 可以实现不同安装包的转换 </p>
+<h3 id="6-参考资料："><a href="#6-参考资料：" class="headerlink" title="6. 参考资料："></a>6. 参考资料：</h3><p>\10.0.0.25\公司数据盘\dailybuild\linux_qt\package\rpm youdu-192.9.2.zip为安装目录结构</p>
+<p><a target="_blank" rel="noopener" href="https://fedoraproject.org/wiki/How_to_create_an_RPM_package/zh-cn#.E5.87.86.E5.A4.87.E7.B3.BB.E7.BB.9F">https://fedoraproject.org/wiki/How_to_create_an_RPM_package/zh-cn#.E5.87.86.E5.A4.87.E7.B3.BB.E7.BB.9F</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/keithtt/p/8203387.html">https://www.cnblogs.com/keithtt/p/8203387.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.51cto.com/luweiv998/2354385">https://blog.51cto.com/luweiv998/2354385</a></p>
+<h3 id="7-注意"><a href="#7-注意" class="headerlink" title="7. 注意:"></a>7. 注意:</h3><p>hicolor下的目录icon图标与deb不一致</p>
+<p>ldd libprotobuf.so获取libstdc++的依赖共享库，同时放到/home/xinda/xinda-workspace/qt-linux/build-youduqt-Desktop_Qt_5_7_1_GCC_64bit-Release/output/debug/lib目录下（可执行文件的相同目录下的lib目录），再次依赖时路径变为该路径，如果不放在中标麒麟系统上会有问题，中标麒麟libstdc++对应版本没有</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/09/27/32-字符编码问题/" class="prev">上一篇：字符编码问题</a>
+    
+    
+    <a href="/2019/09/17/02-Linux平台打包AppImage格式的可执行文件-md/" class="next">下一篇：Linux平台打包AppImage格式的可执行文件</a>
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

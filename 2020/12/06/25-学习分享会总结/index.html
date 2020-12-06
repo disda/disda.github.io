@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>学习分享会总结 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="1、QT第一次学习（2019-07-10）学习内容主要包括：https://www.bilibili.com/video/av24374568/?p=3基本的qt主函数结构、消息机制及信号槽机制。sean总结：
+首先需要添加一个Q_OBJECT宏定义，该宏定义可以让该类具有信号槽的功能，要正确的处理">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="学习分享会总结"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2020-12-06T05:40:48.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2020-12-06
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">学习分享会总结</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <p>1、QT第一次学习（2019-07-10）<br>学习内容主要包括：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av24374568/?p=3">https://www.bilibili.com/video/av24374568/?p=3</a><br>基本的qt主函数结构、消息机制及信号槽机制。<br>sean总结：</p>
+<p>首先需要添加一个Q_OBJECT宏定义，该宏定义可以让该类具有信号槽的功能，要正确的处理信号和槽，必须借助一个称为moc（Meta Object Compiler）的QT工具，MOC工具是一个C++预处理程序，为高层次的事件处理自动生成所需要的附加代码。<br>消息的转发的函数过程是：<br>=》1、程序自己产生：postEvent()非阻塞型发送消息事件及sendEvent()阻塞型消息事件。2、操作系统自己产生<br>=》事件过滤器eventFilter函数（需要注册）<br>=》1、event函数，作用是接收事件，参数是一个事件（参数是QEvent<em>）2、notify函数，作用是截获事件，有一个接收者参数加QEvent</em>。<br>=》各种具体的event事件函数。<br>如何判断一个事件是否可以继续传播（notify、eventFilter与event函数）：<br>①返回true 等价于 调用accept()，表示事件已处理完成，将不再传播。<br>②返回false 等价于 调用ignore()，表示事件未处理完成，将继续传播。<br>信号槽机制过程：<br>=》定义信号及槽<br>=》建立信号与槽的连接（connect）<br>=》emit发送信号<br>=》槽处理信号<br>主函数结构：<br>=》新建QApplication对象<br>=》新建主界面的对象<br>=》显示主界面<br>=》进入消息循环<br>disda总结：</p>
+<p>在一个widget窗体中，事件首先进入到bool QObject::event(QEvent *e)函数中，此函数override作用主要用户截获事件。</p>
+<p>event demo<br>class MyClass : public QWidget<br>{<br>    Q_OBJECT</p>
+<p>public:<br>    MyClass(QWidget *parent = 0);<br>    ~MyClass();</p>
+<pre><code>bool event(QEvent* ev)
+&#123;
+    if (ev-&gt;type() == QEvent::PolishRequest) &#123;
+        // overwrite handling of PolishRequest if any
+        doThings();
+        return true;
+    &#125; else  if (ev-&gt;type() == QEvent::Show) &#123;
+        // complement handling of Show if any
+        doThings2();
+        QWidget::event(ev);
+        return true;
+    &#125;
+    // Make sure the rest of events are handled
+    return QWidget::event(ev);
+&#125;</code></pre>
+<p>};<br>此函数中，可以对QEvent::PolishRequest和QEvent::Show事件进行拦截</p>
+<p>可以把 Qt 的事件传递看成链状，如果子类没有处理则会向父类进行传递。qt 有做了特殊的设计：事件对象默认是 accept 的，而作为所有组件的父类QWidget的默认实现则是调用ignore()。这么一来，如果你自己实现事件处理函数，不调用QWidget的默认实现，你就等于是接受了事件；如果你要忽略事件，只需调用QWidget的默认实现。ignore()说明我们想让事件继续传播，accept()说明我们不想让事件继续传播。<br>QPainter函数的理解：QPainter(QPaintDevice *device)，注意QPaintDevice为画笔所要画的对象，需要通常传入一个widget，然后我们发现QWidget是继承自QObject和QPaintDevice的。<br>2. Qt第二次学习总结（2019-7-11）<br>学习内容：主要为QPainter的使用<br>2d绘图系统Arthur有着三大基类QPainter、QPainterDevice、QPainterEngine。<br>QPainter进行具体的绘图操作，如画点、画线、填充、转换、alpha通道等。<br>QPainterDevice用于提供绘图的设备。<br>QPainterEngine用于提供一些接口。</p>
+<p>最基本的绘图元素：画笔(QPen)、画刷(QBrush)。<br>画笔定义风格(线形)，宽度，端点是如何绘制的(cap-style)，端点的连接方式(join-style)。<br>画刷用于颜色的填充及设置填充的格式。<br>画笔的线形风格：Qt::SolidLine（默认），Qt::DashLine，Qt::DotLine，Qt::DashDotLine，Qt::DashDotDotLine，Qt::CustomDashLine。<br>画笔的cap-style：Qt::SqureCa（默认），QT::FlatCap，Qt::RoundCap。</p>
+<p>画笔的join-style：Qt::MiterJoin，Qt::BevelJoin，Qt::RoundJoin，Qt::SvgMiterJoin</p>
+<p>反走样：<br>我们在光栅图形显示器上绘制非水平、非垂直的直线或多边形边界时，或多或少会呈现锯齿状外观。这是因为直线和多边形的边界是连续的，而光栅则是由离散的点组成。在光栅显示设备上表现直线、多边形等，必须在离散位置采样。由于采样不充分重建后造成的信息失真，就叫走样；用于减少或消除这种效果的技术，就称为反走样。可以用如下语句设置反走样：<br>painter.setRenderHint(QPainter::Antialiasing, true);<br>QPainter是一个状态机，因此，只要这里我们打开了它，之后所有的代码都会是反走样绘制的了。</p>
+<p>坐标系统与绘制设备（下次补充）</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2020/12/06/28-QtCreator使用技巧/" class="prev">上一篇：28-QtCreator使用技巧</a>
+    
+    
+    <a href="/2020/12/06/24-在windows下面像objective_C那样多线程编程/" class="next">下一篇：(转)在windows下面像objective_C那样多线程编程</a>
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

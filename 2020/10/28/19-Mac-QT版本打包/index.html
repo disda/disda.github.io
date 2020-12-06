@@ -4,22 +4,19 @@
   <meta charset="utf-8">
   <link rel="dns-prefetch" href="https://disda.github.io">
   
-  <title>关于 | Hexo</title>
+  <title>Mac-QT版本打包 | Hexo</title>
   <meta name="author" content="彭家达(disda)">
   
-  <meta name="description" content="个人简介我叫彭家达，熟悉c/c++,Qt以及会一些前端
-工作经历
-2018/10 ~ 2020/12 珠海信达九州科技有限公司，负责有度即时通跨平台客户端的开发工作以及国产化Linux客户端相关适配工作
+  <meta name="description" content="编译依赖库，jgapi，以及release版本
 
-教育经历
-2014/9 ~ 2018/7 西安邮电大学通信工程专业
+在相应的工程中，update工程的qmake中添加CONFIG -= app_bundle，同样在meeting工程中添加CONFIG -= app_bundle，这个语句的作用就是将程序生成为exec文件而非Mac的app可执行文件
 
-联系方式微信号：peng">
+在youdu">
   
   
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-  <meta property="og:title" content="关于"/>
+  <meta property="og:title" content="Mac-QT版本打包"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -88,11 +85,11 @@
       
 <div class="date">
 
-<time datetime="2018-12-05T16:21:50.000Z"
+<time datetime="2020-10-28T05:37:11.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2018-12-06
+  2020-10-28
 </time>
 
 
@@ -103,27 +100,44 @@
 
     </div>
   
-  <h1 class="title" itemprop="name">关于</h1>
+  <h1 class="title" itemprop="name">Mac-QT版本打包</h1>
   <div class="entry-content" itemprop="articleBody">
     
-    <div class="post-toc">
-      <div class="toc-title">TOC</div>
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">个人简介</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%BB%8F%E5%8E%86"><span class="toc-number"></span> <span class="toc-text">工作经历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%99%E8%82%B2%E7%BB%8F%E5%8E%86"><span class="toc-number"></span> <span class="toc-text">教育经历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">联系方式</span></a>
-    </div>
-    
-    <h4 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h4><p>我叫彭家达，熟悉c/c++,Qt以及会一些前端</p>
-<h3 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h3><ul>
-<li>2018/10 ~ 2020/12 珠海信达九州科技有限公司，负责有度即时通跨平台客户端的开发工作以及国产化Linux客户端相关适配工作</li>
-</ul>
-<h3 id="教育经历"><a href="#教育经历" class="headerlink" title="教育经历"></a>教育经历</h3><ul>
-<li>2014/9 ~ 2018/7 西安邮电大学通信工程专业</li>
-</ul>
-<h3 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h3><p>微信号：pengjiada123<br>qq号：<a href="mailto:&#53;&#57;&#x33;&#x32;&#49;&#55;&#52;&#x33;&#57;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;">&#53;&#57;&#x33;&#x32;&#49;&#55;&#52;&#x33;&#57;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;</a></p>
+    <ol>
+<li><p>编译依赖库，jgapi，以及release版本</p>
+</li>
+<li><p>在相应的工程中，update工程的qmake中添加<br>CONFIG -= app_bundle，同样在meeting工程中添加<br>CONFIG -= app_bundle，这个语句的作用就是将程序生成为exec文件而非Mac的app可执行文件</p>
+</li>
+<li><p>在youduqt的主工程中添加<br>CONFIG += app_bundle，这样工程编译就会生成youduqt的app可执行文件</p>
+</li>
+<li><p>对生成的youduqt.app文件执行macdeployqt youduqt.app，即可将youduqt.app的依赖移动到app包内，但是macdeployqt有个缺点就是不能将工程缺少的第三方依赖库也移动到app包内</p>
+</li>
+<li><p>利用命令otool -L 中检测可执行文件的所以依赖，如果没有相对路径说明在app包的路径下没有找到次依赖如</p>
+</li>
+<li><p>将youduqt依赖的库文件移动到/youduqt.app/Contents/Frameworks目录下</p>
+</li>
+<li><p>利用install_name_tool 修改 依赖库的查找路径 install_name_tool -change “libFramelessWindow.1.dylib” “@executable_path/../Frameworks/libFramelessWindow.1.dylib” youduqt<br>install_name_tool -change “libscreenshot.1.dylib” “@executable_path/../Frameworks/libscreenshot.1.dylib” youduqt<br>install_name_tool -change “libeventbus.1.dylib” “@executable_path/../Frameworks/libeventbus.1.dylib” youduqt<br>install_name_tool -change “libimageviewer.1.dylib” “@executable_path/../Frameworks/libimageviewer.1.dylib” youduqt<br>install_name_tool -change “libbrowser.1.dylib” “@executable_path/../Frameworks/libbrowser.1.dylib” youduqt<br>install_name_tool -change “libquazip.1.dylib” “@executable_path/../Frameworks/libquazip.1.dylib” youduqt</p>
+</li>
+<li><p>可能还有一些库文件之间的相互依赖，如libimageviewer.1.dylib依赖libFramelessWindow.1.dylib，点击youduqt.app，如果可以正常执行就可。</p>
+</li>
+<li><p>打包，对可以正常运行的youduqt.app包执行macdeployqt youduqt -dmg 就可以压缩成dmg包给被人使用<br>效果：</p>
+</li>
+</ol>
+<p>体验：<br>\10.0.0.25\公司数据盘\dailybuild\mac_qt youduqt.dmg</p>
 
   </div>
 
 </article>
 
+
+  <nav id="pagenavi">
+    
+    <a href="/2020/11/07/10-crashdump查看/" class="prev">上一篇：crashdump查看</a>
+    
+    
+    <a href="/2020/09/17/18-在程序中以及qmake中判断系统架构/" class="next">下一篇：在程序中以及qmake中判断系统架构</a>
+    
+  </nav>
 
         </div>
         
