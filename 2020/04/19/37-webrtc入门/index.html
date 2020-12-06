@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>webrtc入门 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="webrtc概述
+webrtc 文件传输 p2p
+音视频设备管理
+数据采集
+数据传输，实时互动
+工作机制
+
+例子
+https://appr.tc
+实际技术含量很高：
+目录结构
+module 模块最重要
+p2p很多类型
+
+
+web服务器libuvlibevent两个v8引擎
+
+服务端程序运行在后台no">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="webrtc入门"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2020-04-19T07:11:26.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2020-04-19
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">webrtc入门</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#webrtc%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">webrtc概述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">目录结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#web%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">web服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%87%E9%9B%86%E6%A1%8C%E9%9D%A2%E5%86%85%E5%AE%B9"><span class="toc-number">2.1.</span> <span class="toc-text">采集桌面内容</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9D%9E%E9%9F%B3%E8%A7%86%E9%A2%91%E6%95%B0%E6%8D%AE"><span class="toc-number">2.2.</span> <span class="toc-text">非音视频数据</span></a></li></ol></li></ol>
+    </div>
+    
+    <h4 id="webrtc概述"><a href="#webrtc概述" class="headerlink" title="webrtc概述"></a>webrtc概述</h4><ul>
+<li>webrtc 文件传输 p2p</li>
+<li>音视频设备管理</li>
+<li>数据采集</li>
+<li>数据传输，实时互动</li>
+<li>工作机制</li>
+</ul>
+<p><strong>例子</strong></p>
+<p><a target="_blank" rel="noopener" href="https://appr.tc/">https://appr.tc</a></p>
+<p>实际技术含量很高：</p>
+<h5 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h5><ol>
+<li>module 模块最重要</li>
+<li>p2p很多类型</li>
+<li></li>
+</ol>
+<h4 id="web服务器"><a href="#web服务器" class="headerlink" title="web服务器"></a>web服务器</h4><p>libuv<br>libevent<br>两个v8引擎</p>
+<ol>
+<li>服务端程序运行在后台<br>node 01_test.js<br>nohub node 01_test.js &amp; 程序运行在</li>
+</ol>
+<p>npm install forever -g<br>forever 全局生效<br>forever start server.js<br>forever stop server.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MediaStream.addTrack()</span><br><span class="line">MediaStream.removeTrack()</span><br><span class="line">MediaStream.getVideoTracks()</span><br><span class="line">MediaStream.getAudioTracks()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="采集桌面内容"><a href="#采集桌面内容" class="headerlink" title="采集桌面内容"></a>采集桌面内容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WebRTC采集屏面数据: .</span><br><span class="line">getDisplayMedia</span><br><span class="line">var promise&#x3D;navigator. medi aDevices. ge tDisplayMedia (constraints) ; .</span><br><span class="line">其中contraints是可选，constaints中约束 与getUserMedi :函数中的一-致。</span><br><span class="line">在使用chrome浏览器录屏之前,需要在url栏中输入chrome :&#x2F;&#x2F;f1ags&#x2F;#enble-experim ental-web-platfi orm-features打开录屏设置,然后重启浏览器</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="非音视频数据"><a href="#非音视频数据" class="headerlink" title="非音视频数据"></a>非音视频数据</h5><p>createDataChannel</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2020/06/02/16-UOS-ARM64-Qt环境搭建/" class="prev">上一篇：UOS-ARM64_Qt环境搭建</a>
+    
+    
+    <a href="/2020/04/08/15-Qt（5-14包括qwebengineview）源代码编译/" class="next">下一篇：Qt（5.14包括qwebengineview）源代码编译</a>
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

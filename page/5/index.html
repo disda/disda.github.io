@@ -1,0 +1,361 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>page | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <div class="article-list-wrap">
+  
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/03/16/45-weak-ptr/" itemprop="url">45-weak_ptr</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      weak_ptr为了配合shared_ptr而引入的一种智能指针，它更像是shared_ptr的一个助手，而不是智能指针，因为他不具有普通指针的行为。没有重载，operator*和-&gt;.它的最大作用就是配合shared_ptr工作，像旁观者一样。
+lock创建一个相应的对象出来没有重载operator*和-&gt;，这是特意的，因为不共享指针。
+123456789101112131415t ...
+      <a href="/2019/03/16/45-weak-ptr/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-03-16T07:23:56.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-16
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/03/16/45-shared-array/" itemprop="url">shared_array</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      shared_arrayshared_array类似shared_ptr，它包装了操作符new[]在堆上分配的动态数组，同样使用了引用计数机制为数组提供了一个代理，可以在程序的生命周期里长期存在，知道没有任何引用才释放内存。
+析构析构使用的是 delete []
+12345678910111213141516171819202122#include&lt;iostream&gt;#include ...
+      <a href="/2019/03/16/45-shared-array/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-03-16T07:22:43.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-16
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/03/11/44-shared-ptr/" itemprop="url">44-shared_ptr</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      共享型的智能指针非常重要引用技术对象构造顺序问题
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919 ...
+      <a href="/2019/03/11/44-shared-ptr/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-03-11T07:21:41.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-11
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/03/10/43-智能指针/" itemprop="url">智能指针</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      什么是智能指针auto_ptr,auto_ptr,scoped_ptr,scoped_array,shared_ptr,shared_
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include&lt;iostream&gt;usin ...
+      <a href="/2019/03/10/43-智能指针/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-03-10T07:20:43.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-10
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/03/09/42-动态库静态库/" itemprop="url">42-动态库静态库</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      C++能重载而C不能重载原因C++所有函数在编译后是不一样的然而C语言是取名是很简单的。
+1命名倾轧
+
+调用约定extern “C”原理原先是C++编译，现在给出这个语句，就按C的方式编译。lib，dll名字导出的问题我们调用函数是不携带返回值信息的。
+静态库lib:隐藏的作用
+1#pragma comment(lib,&quot;Test_Lib.lib&quot;)
+一次编译处处执行版本和软 ...
+      <a href="/2019/03/09/42-动态库静态库/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-03-09T07:19:49.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-09
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/03/08/41-多维数组动态内存开辟与释放/" itemprop="url">41-多维数组动态内存开辟与释放</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      C完成对二维数组的开辟1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include&lt;iostream&gt;#include&lt;assert.h&gt;#include&lt;vld.h&gt;using name ...
+      <a href="/2019/03/08/41-多维数组动态内存开辟与释放/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-03-08T07:18:21.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-08
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/03/08/40-Valgrind使用/" itemprop="url">40-Valgrind使用</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      最根本的目的就是C++，对底层比较清楚。
+valgrind内存检测工具12345wget ftp:&#x2F;&#x2F;sourceware.org&#x2F;pub&#x2F;valgrind&#x2F;valgrind-3.13.0.tar.bz2tar -jxzf valgrind-3.13.0.tar.bz2.&#x2F;configuremake;sudo make install; ...
+      <a href="/2019/03/08/40-Valgrind使用/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-03-08T07:17:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-08
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+</div>
+
+<nav id="pagenavi">
+  
+  <a href="/page/4/" class="prev">上一页</a>
+  
+  
+</nav>
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

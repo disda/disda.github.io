@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>自定义菜单_个人详情页方案 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="客户端获取配置个人详情页菜单接口：/v3/api/jginfo/get.ent.common.cfg.single
+说明：通过key获取配置项
+类型:POST
+
+
+
+参数
+类型
+说明
+
+
+
+key
+string
+配置项key的值，个人详情页处自定义菜单为userInfoMenuCfg
+
+
+versi">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="自定义菜单_个人详情页方案"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2020-12-06T07:12:53.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2020-12-06
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">自定义菜单_个人详情页方案</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%8E%B7%E5%8F%96%E9%85%8D%E7%BD%AE%E4%B8%AA%E4%BA%BA%E8%AF%A6%E6%83%85%E9%A1%B5%E8%8F%9C%E5%8D%95"><span class="toc-number">1.</span> <span class="toc-text">客户端获取配置个人详情页菜单</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AFpost%E6%95%B0%E6%8D%AE%E7%BB%99%E7%AC%AC%E4%B8%89%E6%96%B9"><span class="toc-number">2.</span> <span class="toc-text">客户端post数据给第三方</span></a></li></ol>
+    </div>
+    
+    <h5 id="客户端获取配置个人详情页菜单"><a href="#客户端获取配置个人详情页菜单" class="headerlink" title="客户端获取配置个人详情页菜单"></a>客户端获取配置个人详情页菜单</h5><p>接口：/v3/api/jginfo/get.ent.common.cfg.single</p>
+<p>说明：通过key获取配置项</p>
+<p>类型:POST</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>key</td>
+<td>string</td>
+<td>配置项key的值，个人详情页处自定义菜单为userInfoMenuCfg</td>
+</tr>
+<tr>
+<td>version</td>
+<td>time</td>
+<td>时间</td>
+</tr>
+</tbody></table>
+<p>output:<br>参数 | 类型 | 说明<br>—|—|—|<br>value | string | 配置项对应的json数据</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;menu_id&quot;</span>: <span class="string">&quot;996CA5DD8E7142AFAE2247D1D9798FE6&quot;</span></span><br><span class="line">            <span class="string">&quot;menu_name&quot;</span>: <span class="string">&quot;转工单&quot;</span>,          <span class="comment">// 菜单名称</span></span><br><span class="line">            <span class="attr">&quot;menu_url&quot;</span>: <span class="string">&quot;http://10.0.0.188/tes/test.php&quot;</span>, <span class="comment">// POST的第三方接口第三方URL</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;all,mobile,email,...&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;menu_id&quot;</span>: <span class="string">&quot;E3EDE615554243D2AE134F3E191D47A2&quot;</span></span><br><span class="line">            <span class="string">&quot;menu_name&quot;</span>: <span class="string">&quot;菜单a&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;menu_url&quot;</span>: <span class="string">&quot;https://youdu.im&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;mobile,email,...&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="客户端post数据给第三方"><a href="#客户端post数据给第三方" class="headerlink" title="客户端post数据给第三方"></a>客户端post数据给第三方</h5><p>接口：如menu_url:<a target="_blank" rel="noopener" href="http://10.0.0.188/tes/test.php">http://10.0.0.188/tes/test.php</a><br>类型：POST</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>string</td>
+<td>右键菜单的数据</td>
+</tr>
+</tbody></table>
+<p>token: 通过服务器接口”/v3/api/jginfo/identify.gen”获取的identify token放在header中</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;header&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;requestId&quot;</span>: <span class="string">&quot;&#123;4DE66F40-7D6F-4800-AFE6-DBF5E5F8E597&#125;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;timestamp&quot;</span>: <span class="number">1428550256</span>,</span><br><span class="line">        <span class="attr">&quot;token&quot;</span>: <span class="string">&quot;4309A6D85DA844149A43FA3B88C75188&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;menuContent&quot;</span>: menuContent内容的base64</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>menuContent内容：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;Worknote&quot;</span>:<span class="string">&quot;天天向上&quot;</span></span><br><span class="line">    <span class="string">&quot;Cel.&quot;</span>:<span class="string">&quot;17703063025&quot;</span>，</span><br><span class="line">    <span class="string">&quot;Email&quot;</span>:<span class="string">&quot;596366@qq.com&quot;</span>,</span><br><span class="line">    &lt;!--自定义用户属性--&gt;</span><br><span class="line">    &quot;入职时间&quot;：&quot;&quot;,</span><br><span class="line">    &quot;地址&quot;:&quot;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2020/12/06/39-Emmet语法/" class="prev">上一篇：Emmet语法</a>
+    
+    
+    <a href="/2020/12/06/24-在windows下面像objective_C那样多线程编程/" class="next">下一篇：(转)在windows下面像objective_C那样多线程编程</a>
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

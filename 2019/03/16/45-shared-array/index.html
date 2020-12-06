@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>shared_array | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="shared_arrayshared_array类似shared_ptr，它包装了操作符new[]在堆上分配的动态数组，同样使用了引用计数机制为数组提供了一个代理，可以在程序的生命周期里长期存在，知道没有任何引用才释放内存。
+析构析构使用的是 delete []
+123456789101112131">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="shared_array"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-03-16T07:22:43.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-16
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">shared_array</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#shared-array"><span class="toc-number">1.</span> <span class="toc-text">shared_array</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%90%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">析构</span></a></li></ol></li></ol>
+    </div>
+    
+    <h3 id="shared-array"><a href="#shared-array" class="headerlink" title="shared_array"></a>shared_array</h3><p>shared_array类似shared_ptr，它包装了操作符new[]在堆上分配的动态数组，同样使用了引用计数机制为数组提供了一个代理，可以在程序的生命周期里长期存在，知道没有任何引用才释放内存。</p>
+<h4 id="析构"><a href="#析构" class="headerlink" title="析构"></a>析构</h4><p>析构使用的是 delete []</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;boost/smart_ptr/shared_array.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> boost;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> *p = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">	<span class="function">shared_array&lt;<span class="keyword">int</span>&gt; <span class="title">paa</span><span class="params">(p)</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		paa[i] = i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;paa[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数对象，本质是对象，用起来像函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">#ifndef BOOST_SMART_PTR_SHARED_ARRAY_HPP_INCLUDED</span><br><span class="line">#define BOOST_SMART_PTR_SHARED_ARRAY_HPP_INCLUDED</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#include &lt;cstddef&gt;            &#x2F;&#x2F; for std::ptrdiff_t</span><br><span class="line">#include &lt;algorithm&gt;          &#x2F;&#x2F; for std::swap</span><br><span class="line">#include &lt;functional&gt;         &#x2F;&#x2F; for std::less</span><br><span class="line"></span><br><span class="line">namespace boost</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">template&lt;class T&gt; class shared_array</span><br><span class="line">&#123;</span><br><span class="line">private:</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Borland 5.5.1 specific workarounds</span><br><span class="line">    typedef checked_array_deleter&lt;T&gt; deleter;</span><br><span class="line">    typedef shared_array&lt;T&gt; this_type;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">    typedef T element_type;</span><br><span class="line"></span><br><span class="line">    explicit shared_array(T * p &#x3D; 0): px(p), pn(p, deleter())</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    template&lt;class D&gt; shared_array(T * p, D d): px(p), pn(p, d)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    void reset(T * p &#x3D; 0)</span><br><span class="line">    &#123;</span><br><span class="line">        BOOST_ASSERT(p &#x3D;&#x3D; 0 || p !&#x3D; px);</span><br><span class="line">        this_type(p).swap(*this);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    template &lt;class D&gt; void reset(T * p, D d)</span><br><span class="line">    &#123;</span><br><span class="line">        this_type(p, d).swap(*this);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    T &amp; operator[] (std::ptrdiff_t i) const &#x2F;&#x2F; never throws</span><br><span class="line">    &#123;</span><br><span class="line">        BOOST_ASSERT(px !&#x3D; 0);</span><br><span class="line">        BOOST_ASSERT(i &gt;&#x3D; 0);</span><br><span class="line">        return px[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    T * get() const &#x2F;&#x2F; never throws</span><br><span class="line">    &#123;</span><br><span class="line">        return px;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">#include &lt;boost&#x2F;smart_ptr&#x2F;detail&#x2F;operator_bool.hpp&gt;</span><br><span class="line"></span><br><span class="line">    bool unique() const </span><br><span class="line">    &#123;</span><br><span class="line">        return pn.unique();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    long use_count() const </span><br><span class="line">    &#123;</span><br><span class="line">        return pn.use_count();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void swap(shared_array&lt;T&gt; &amp; other) </span><br><span class="line">    &#123;</span><br><span class="line">        std::swap(px, other.px);</span><br><span class="line">        pn.swap(other.pn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line"></span><br><span class="line">    T * px;                     </span><br><span class="line">    detail::shared_count pn;    </span><br><span class="line"></span><br><span class="line">&#125;;  y</span><br><span class="line"></span><br><span class="line">template&lt;class T&gt; inline bool operator&#x3D;&#x3D;(shared_array&lt;T&gt; const &amp; a, shared_array&lt;T&gt; const &amp; b) &#x2F;&#x2F; never throws</span><br><span class="line">&#123;</span><br><span class="line">    return a.get() &#x3D;&#x3D; b.get();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">template&lt;class T&gt; inline bool operator!&#x3D;(shared_array&lt;T&gt; const &amp; a, shared_array&lt;T&gt; const &amp; b) </span><br><span class="line">&#123;</span><br><span class="line">    return a.get() !&#x3D; b.get();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">template&lt;class T&gt; inline bool operator&lt;(shared_array&lt;T&gt; const &amp; a, shared_array&lt;T&gt; const &amp; b) &#x2F;&#x2F; never throws</span><br><span class="line">&#123;</span><br><span class="line">    return std::less&lt;T*&gt;()(a.get(), b.get());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">template&lt;class T&gt; void swap(shared_array&lt;T&gt; &amp; a, shared_array&lt;T&gt; &amp; b) &#x2F;&#x2F; never throws</span><br><span class="line">&#123;</span><br><span class="line">    a.swap(b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">#endif  &#x2F;&#x2F; #if defined(BOOST_NO_MEMBER_TEMPLATES) &amp;&amp; !defined(BOOST_MSVC6_MEMBER_TEMPLATES)</span><br><span class="line"></span><br><span class="line">#endif  &#x2F;&#x2F; #ifndef BOOST_SMART_PTR_SHARED_ARRAY_HPP_INCLUDED</span><br></pre></td></tr></table></figure>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/03/16/45-weak-ptr/" class="prev">上一篇：45-weak_ptr</a>
+    
+    
+    <a href="/2019/03/11/44-shared-ptr/" class="next">下一篇：44-shared_ptr</a>
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

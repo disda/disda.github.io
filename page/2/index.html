@@ -78,160 +78,6 @@
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/09/17/18-在程序中以及qmake中判断系统架构/" itemprop="url">在程序中以及qmake中判断系统架构</a>
-  </h1>
-  <div class="entry-content" itemprop="articleBody">
-    
-      程序中Q_PROCESSOR_ARM类似的宏定义
-12#ifdef Q_PROCESSOR_X86#endif
-qmake中 
-12unix:contains(QT_ARCH,x86_64) &#123;&#125;
-...
-      <a href="/2020/09/17/18-在程序中以及qmake中判断系统架构/" class="more-link">
-        继续阅读
-        <div class="meta meta-index-post-entry">
-          
-<div class="date">
-
-<time datetime="2020-09-17T05:28:51.000Z"
-      
-      data-updated="true"
-       itemprop="datePublished">
-  2020-09-17
-</time>
-
-
-
-
-
-</div>
-
-        </div>
-      </a>
-    
-  </div>
-
-
-</article>
-  
-  <article class="post">
-
-  <h1 class="title" itemprop="name">
-    <a href="/2020/08/10/34-截图支持wayland桌面/" itemprop="url">34-截图支持wayland桌面</a>
-  </h1>
-  <div class="entry-content" itemprop="articleBody">
-    
-      ...
-      <a href="/2020/08/10/34-截图支持wayland桌面/" class="more-link">
-        继续阅读
-        <div class="meta meta-index-post-entry">
-          
-<div class="date">
-
-<time datetime="2020-08-10T05:45:57.000Z"
-      
-      data-updated="true"
-       itemprop="datePublished">
-  2020-08-10
-</time>
-
-
-
-
-
-</div>
-
-        </div>
-      </a>
-    
-  </div>
-
-
-</article>
-  
-  <article class="post">
-
-  <h1 class="title" itemprop="name">
-    <a href="/2020/06/11/17-ARM64鲲鹏版本编译/" itemprop="url">ARM64鲲鹏版本编译</a>
-  </h1>
-  <div class="entry-content" itemprop="articleBody">
-    
-      
-下载官方qt镜像(arm64) 参见上一篇文章
-
-切换默认编译器为gcc g++，不要使用clang和chang++，否则会出现很多莫名的错误无从排查。
-
-依次编译依赖库openssl,curl protobuf 可参考 （https://www.huaweicloud.com/kunpeng/software.html）
-
-编译nopoll由于网上下载源码编译移植出现syntax error ...
-      <a href="/2020/06/11/17-ARM64鲲鹏版本编译/" class="more-link">
-        继续阅读
-        <div class="meta meta-index-post-entry">
-          
-<div class="date">
-
-<time datetime="2020-06-11T05:28:29.000Z"
-      
-      data-updated="true"
-       itemprop="datePublished">
-  2020-06-11
-</time>
-
-
-
-
-
-</div>
-
-        </div>
-      </a>
-    
-  </div>
-
-
-</article>
-  
-  <article class="post">
-
-  <h1 class="title" itemprop="name">
-    <a href="/2020/06/03/03-Linux下QtCreator输入中文问题也可以解决打的包无法输入中文问题-md/" itemprop="url">Linux下QtCreator输入中文问题也可以解决打的包无法输入中文问题</a>
-  </h1>
-  <div class="entry-content" itemprop="articleBody">
-    
-      问题:通常在linux下安装了QtCreator编译器,编写代码无法输入中文.
-环境:
-环境：ubuntu16.04搜狗输入法Qt Creator 5.7.1
-分步指南首先需要安装 sudo apt-get install fcitx-frontend-qt5将目录下的/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libf ...
-      <a href="/2020/06/03/03-Linux下QtCreator输入中文问题也可以解决打的包无法输入中文问题-md/" class="more-link">
-        继续阅读
-        <div class="meta meta-index-post-entry">
-          
-<div class="date">
-
-<time datetime="2020-06-03T09:06:18.000Z"
-      
-      data-updated="true"
-       itemprop="datePublished">
-  2020-06-03
-</time>
-
-
-
-
-
-</div>
-
-        </div>
-      </a>
-    
-  </div>
-
-
-</article>
-  
-  <article class="post">
-
-  <h1 class="title" itemprop="name">
     <a href="/2020/06/02/16-UOS-ARM64-Qt环境搭建/" itemprop="url">UOS-ARM64_Qt环境搭建</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
@@ -268,11 +114,65 @@ https://blog.csdn.n ...
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/04/08/15-Qt（5-14包括qwebengineview）源代码编译/" itemprop="url">15-Qt（5.14包括qwebengineview）源代码编译</a>
+    <a href="/2020/04/19/37-webrtc入门/" itemprop="url">webrtc入门</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      ...
+      webrtc概述
+webrtc 文件传输 p2p
+音视频设备管理
+数据采集
+数据传输，实时互动
+工作机制
+
+例子
+https://appr.tc
+实际技术含量很高：
+目录结构
+module 模块最重要
+p2p很多类型
+
+
+web服务器libuvlibevent两个v8引擎
+
+服务端程序运行在后台node 01_test.jsnohub node 01_test.js &amp; 程序运行在
+
+n ...
+      <a href="/2020/04/19/37-webrtc入门/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2020-04-19T07:11:26.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2020-04-19
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2020/04/08/15-Qt（5-14包括qwebengineview）源代码编译/" itemprop="url">Qt（5.14包括qwebengineview）源代码编译</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      准备：安装vs2019下载qt的源代码https://mirrors.tuna.tsinghua.edu.cn/qt/official_releases/qt/5.14/5.14.0/安装qt5.14的release版本，主要用到了里面自带的jom.exe编译器python2.7 （or later）这里一定要安装python2，不然在configure的时候提示webengine不支持此模块， ...
       <a href="/2020/04/08/15-Qt（5-14包括qwebengineview）源代码编译/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
@@ -303,7 +203,7 @@ https://blog.csdn.n ...
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/04/06/14-Qt_release_pdb文件安装/" itemprop="url">14-Qt_release_pdb文件安装</a>
+    <a href="/2020/04/06/14-Qt_release_pdb文件安装/" itemprop="url">Qt_release_pdb文件安装</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
@@ -341,7 +241,7 @@ https://blog.csdn.n ...
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/04/06/13-Qt国内镜像/" itemprop="url">13-Qt国内镜像</a>
+    <a href="/2020/04/06/13-Qt国内镜像/" itemprop="url">Qt国内镜像</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
@@ -380,11 +280,13 @@ https://mirrors.tuna.tsinghua.edu.cn/qt/official_releases/qt/
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/03/25/22-qwebengine与网页js交互/" itemprop="url">22-qwebengine与网页js交互</a>
+    <a href="/2020/03/25/22-qwebengine与网页js交互/" itemprop="url">qwebengine与网页js交互</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      ...
+      qt提供webchannel实现网页与qt的双向通讯步骤
+ 编写一个用户处理qt与js通信的QObject对象
+1234567891011121314class JsObject : public QObject&#123;    Q_OBJECTpublic:    //用于被js回调    Q_INVOKABLE void JsCallBack(QString strParameter);  ...
       <a href="/2020/03/25/22-qwebengine与网页js交互/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
@@ -415,7 +317,7 @@ https://mirrors.tuna.tsinghua.edu.cn/qt/official_releases/qt/
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2020/03/12/36-监听qtextedit的点击事件/" itemprop="url">36-监听qtextedit的点击事件</a>
+    <a href="/2020/03/12/36-监听qtextedit的点击事件/" itemprop="url">监听qtextedit的点击事件</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
@@ -435,6 +337,124 @@ ui.noticeContentEdit-&gt;viewport()-&gt;installEventFilter(this) ...
       data-updated="true"
        itemprop="datePublished">
   2020-03-12
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2020/03/12/35-模板类不能导出/" itemprop="url">CPP模板类不能导出</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      问题：
+集成libFramelessWindow和eventbus的过程中在linux平台能够正确的链接到，到时window平台则显示如下错误：
+browserwindow.obj:-1: error: LNK2019: 无法解析的外部符号 “__declspec(dllimport) public: void __thiscall MuShadowWindow::setClientWidget ...
+      <a href="/2020/03/12/35-模板类不能导出/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2020-03-12T05:46:57.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2020-03-12
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2020/02/05/12-window安装包-Inno-Setup/" itemprop="url">window安装包-Inno_Setup</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      
+下载安装innosetup-6.0.3  https://www.jrsoftware.org/isdl.phpbuild youduqt release版本在youduqt.exe文件下cmd执行windeployqt.exe youduqt.exe，这样会将相应的依赖库放到与youduqt.exe相应的目录下。
+
+新建安装包脚本youduqt.iss 添加安装语言添加图标默认没有中文简体和 ...
+      <a href="/2020/02/05/12-window安装包-Inno-Setup/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2020-02-05T06:15:12.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2020-02-05
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2020/02/04/11-window版本编译问题/" itemprop="url">window版本编译问题</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      
+ 处理跨平台不兼容代码，以及各种编译错误
+
+ 编译依赖库window版本
+
+
+需要编译处依赖库的MDd(debug)版本以及MD(release)版本,如果需要遇到一下错误，主要原因为qtcreator编译出来的库没有设置好debug和release的区别。
+可以使用vs打开pro工程分别编译degbu和release版本放到相应的目录下。
+正确的做法：其实就是之前的pro文件配置的不正确，应 ...
+      <a href="/2020/02/04/11-window版本编译问题/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2020-02-04T05:22:33.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2020-02-04
 </time>
 
 

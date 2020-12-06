@@ -4,13 +4,17 @@
   <meta charset="utf-8">
   <link rel="dns-prefetch" href="https://disda.github.io">
   
-  <title>22-qwebengine与网页js交互 | Hexo</title>
+  <title>qwebengine与网页js交互 | Hexo</title>
   <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="qt提供webchannel实现网页与qt的双向通讯步骤
+ 编写一个用户处理qt与js通信的QObject对象
+1234567891011121314class JsObject : public QObject&amp;#123;    Q_OBJECTpublic:    //用于被js回调    Q_">
   
   
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-  <meta property="og:title" content="22-qwebengine与网页js交互"/>
+  <meta property="og:title" content="qwebengine与网页js交互"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -94,10 +98,19 @@
 
     </div>
   
-  <h1 class="title" itemprop="name">22-qwebengine与网页js交互</h1>
+  <h1 class="title" itemprop="name">qwebengine与网页js交互</h1>
   <div class="entry-content" itemprop="articleBody">
     
-    
+    <p>qt提供webchannel实现网页与qt的双向通讯<br>步骤</p>
+<p> 编写一个用户处理qt与js通信的QObject对象</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JsObject</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//用于被js回调</span></span><br><span class="line">    <span class="function">Q_INVOKABLE <span class="keyword">void</span> <span class="title">JsCallBack</span><span class="params">(QString strParameter)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">JsObject</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span> : <span class="title">QObject</span><span class="params">(parent)</span> </span>&#123;&#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setText</span><span class="params">(<span class="keyword">const</span> QString &amp;text)</span></span>;</span><br><span class="line">     </span><br><span class="line">signals:</span><br><span class="line">    <span class="comment">//触发信号通知网页</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sendStrToJs</span><span class="params">(<span class="keyword">const</span> QString &amp;text)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>注册qobject对象<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">QWebEnginePage *page = <span class="keyword">new</span> QWebEnginePage(<span class="keyword">this</span>);</span><br><span class="line">ui-&gt;preview-&gt;setPage(page);</span><br><span class="line">QWebChannel *channel = <span class="keyword">new</span> QWebChannel(<span class="keyword">this</span>);</span><br><span class="line"><span class="comment">//注册一个一个用户交互的QObject对象m_content</span></span><br><span class="line">channel-&gt;registerObject(QStringLiteral(<span class="string">&quot;content&quot;</span>), &amp;m_content);</span><br><span class="line">page-&gt;setWebChannel(channel);</span><br><span class="line"> </span><br><span class="line">ui-&gt;preview-&gt;setUrl(QUrl(<span class="string">&quot;qrc:/index.html&quot;</span>));</span><br></pre></td></tr></table></figure></li>
+<li> qt调用js<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">connect(ui-&gt;pushButton_2, &amp;QPushButton::pressed, <span class="keyword">this</span>, [=]()&#123;</span><br><span class="line">    <span class="comment">//直接在page中runJavaScript调用网页提供的js函数</span></span><br><span class="line">    page-&gt;runJavaScript(QString(<span class="string">&quot;output(&#x27;%1&#x27;);&quot;</span>).arg(ui-&gt;lineEdit-&gt;text()));</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">void</span> MainWindow::_onPushbuttonPressed() &#123;</span><br><span class="line">    <span class="comment">//通过触发网页监听的信号，实现qt对页面的通知</span></span><br><span class="line">    emit m_content.sendStrToJs(ui-&gt;lineEdit-&gt;text());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>js调用C++<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">window.onload = function () &#123;</span><br><span class="line">            output(<span class="string">&quot;&quot;</span>);</span><br><span class="line">            <span class="keyword">new</span> QWebChannel(qt.webChannelTransport, function (channel) &#123;</span><br><span class="line"> </span><br><span class="line">                <span class="comment">//获取qt注册的content对象</span></span><br><span class="line">                var content = channel.objects.content;</span><br><span class="line"> </span><br><span class="line">                document.getElementById(<span class="string">&quot;send&quot;</span>).onclick = function () &#123;</span><br><span class="line">                    var input = document.getElementById(<span class="string">&quot;input&quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (!input.value) &#123;</span><br><span class="line">                        <span class="keyword">return</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//直接调用对象的函数，通知qt</span></span><br><span class="line">                    content.JsCallBack(input.value);</span><br><span class="line">                    input.value = <span class="string">&quot;&quot;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//接受qt的信号通知</span></span><br><span class="line">                content.sendStrToJs.connect(function (str) &#123;</span><br><span class="line">                    output(<span class="string">&quot;get str from qt:&quot;</span> + str);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br></pre></td></tr></table></figure></li>
+<li>效果</li>
+</ol>
+
   </div>
 
 </article>
@@ -105,10 +118,10 @@
 
   <nav id="pagenavi">
     
-    <a href="/2020/04/06/13-Qt国内镜像/" class="prev">上一篇：13-Qt国内镜像</a>
+    <a href="/2020/04/06/13-Qt国内镜像/" class="prev">上一篇：Qt国内镜像</a>
     
     
-    <a href="/2020/03/12/36-监听qtextedit的点击事件/" class="next">下一篇：36-监听qtextedit的点击事件</a>
+    <a href="/2020/03/12/36-监听qtextedit的点击事件/" class="next">下一篇：监听qtextedit的点击事件</a>
     
   </nav>
 

@@ -4,13 +4,18 @@
   <meta charset="utf-8">
   <link rel="dns-prefetch" href="https://disda.github.io">
   
-  <title>06-在deepin上打neokeylin的rpm包 | Hexo</title>
+  <title>符号文件的生成 | Hexo</title>
   <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="编译
+下载google-breakpad 在25上有一份(/dailybuild/linux_qt/package/breakpad.zip)
+
+-2.svn checkout http://google-breakpad.googlecode.com/svn/trunk/ google-break">
   
   
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-  <meta property="og:title" content="06-在deepin上打neokeylin的rpm包"/>
+  <meta property="og:title" content="符号文件的生成"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -79,11 +84,11 @@
       
 <div class="date">
 
-<time datetime="2020-12-06T05:18:55.000Z"
+<time datetime="2019-09-16T05:21:32.000Z"
       
       data-updated="true"
        itemprop="datePublished">
-  2020-12-06
+  2019-09-16
 </time>
 
 
@@ -94,10 +99,27 @@
 
     </div>
   
-  <h1 class="title" itemprop="name">06-在deepin上打neokeylin的rpm包</h1>
+  <h1 class="title" itemprop="name">符号文件的生成</h1>
   <div class="entry-content" itemprop="articleBody">
     
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91"><span class="toc-number">1.</span> <span class="toc-text">编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">使用</span></a></li></ol>
+    </div>
     
+    <h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><ol>
+<li>下载google-breakpad 在25上有一份(/dailybuild/linux_qt/package/breakpad.zip)</li>
+</ol>
+<p>-2.svn checkout <a target="_blank" rel="noopener" href="http://google-breakpad.googlecode.com/svn/trunk/">http://google-breakpad.googlecode.com/svn/trunk/</a> google-breakpad-read-only<br>3. ./configure<br>make<br>sudo make install</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ol>
+<li>找到代码库提交的symbolstore.py文件（<a target="_blank" rel="noopener" href="https://dxr.mozilla.org/mozilla-central/source/toolkit/crashreporter/tools/symbolstore.py?raw=1%EF%BC%89">https://dxr.mozilla.org/mozilla-central/source/toolkit/crashreporter/tools/symbolstore.py?raw=1）</a></li>
+<li>执行python /path/to/script/symbolstore.py  /usr/local/bin/dump_syms  ./symbol-storage  ./Application</li>
+<li>dump_syms为一个可执行文件，./symbol-storage 为存放的路径，./Application为应用路径</li>
+<li>将在./symbol-storage路径下生成文件夹Application/uuid同事copy生成的.sym文件到该文件夹</li>
+</ol>
+<p>参考网站：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.inventic.eu/2012/08/qt-and-google-breakpad/">https://blog.inventic.eu/2012/08/qt-and-google-breakpad/</a></p>
+
   </div>
 
 </article>
@@ -105,10 +127,10 @@
 
   <nav id="pagenavi">
     
-    <a href="/2020/12/06/09-符号文件的生成/" class="prev">上一篇：符号文件的生成</a>
+    <a href="/2019/09/17/02-Linux平台打包AppImage格式的可执行文件-md/" class="prev">上一篇：Linux平台打包AppImage格式的可执行文件</a>
     
     
-    <a href="/2020/12/06/04-添加字体资源文件-md/" class="next">下一篇：添加字体资源文件</a>
+    <a href="/2019/09/16/01-Linux平台编译和遇到的问题-md/" class="next">下一篇：Linux平台编译和遇到的问题</a>
     
   </nav>
 

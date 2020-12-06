@@ -78,7 +78,47 @@
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2019/08/27/05-deepin上打包deb包/" itemprop="url">05-deepin上打包deb包</a>
+    <a href="/2019/09/16/01-Linux平台编译和遇到的问题-md/" itemprop="url">Linux平台编译和遇到的问题</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      Linux平台编译及遇到的问题一. 环境搭建步骤
+安装 qt-opensource-linux-x64-5.7.1.run
+安装 gcc，g++
+数据库加密驱动编译 QtCipherSqlitePlugin 生成 libsqlitecipher.so (25上也有), 并拷贝到 /home/xinda/Qt5.7.1/5.7/gcc_64/plugins/sqldrivers中。
+
+二. 编译时 ...
+      <a href="/2019/09/16/01-Linux平台编译和遇到的问题-md/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-09-16T04:56:29.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-09-16
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/08/27/05-deepin上打包deb包/" itemprop="url">deepin上打包deb包</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
@@ -114,11 +154,23 @@
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2019/08/25/27-安装qtcreator代码风格插件/" itemprop="url">27-安装qtcreator代码风格插件</a>
+    <a href="/2019/08/25/27-安装qtcreator代码风格插件/" itemprop="url">安装qtcreator代码风格插件</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      1 . 在Help→About plugins安装代码格式的beautifer插件2. 重启qtcreator3. Tool→Option 选择Beautifier4. 配置5. 配置内容–style=attach–indent=spaces=4–align-pointer=name–align-reference=name–convert-tabs–attach-namespaces–max- ...
+      
+在Help→About plugins安装代码格式的beautifer插件
+
+重启qtcreator
+
+Tool→Option 选择Beautifier
+
+配置
+
+配置内容
+
+
+–style=attach–indent=spaces=4–align-pointer=name–align-reference=name–convert-tabs–attach-namespaces–max-inst ...
       <a href="/2019/08/25/27-安装qtcreator代码风格插件/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
@@ -149,14 +201,13 @@
   <article class="post">
 
   <h1 class="title" itemprop="name">
-    <a href="/2019/07/13/31-消息重发机制方案/" itemprop="url">31-消息重发机制方案</a>
+    <a href="/2019/07/13/31-消息重发机制方案/" itemprop="url">消息重发机制方案</a>
   </h1>
   <div class="entry-content" itemprop="articleBody">
     
-      场景:
- 用户在消息4，和消息5之间发送一条消息失败了，这时这条消息应该怎么进行存储，让用户在窗口下次打开的时候重新发送消息。
+      场景:用户在消息4，和消息5之间发送一条消息失败了，这时这条消息应该怎么进行存储，让用户在窗口下次打开的时候重新发送消息。
 逻辑交互方案确定：
- 消息发送失败，在消息旁边显示感叹号。在不同会话之间切换窗口之间切换，不进行弹窗的提醒。加载一个会话，如果会话有发送失败的消息，将此消息插入到用户当时发送的上下文位置（和现在pc的机制不一样）。如果发送失败的消息，重新发送，会将此消息的位置挪到会话窗 ...
+ 消息发送失败，在消息旁边显示感叹号。在不同会话之间切换窗口之间切换，不进行弹窗的提醒。加载一个会话，如果会话有发送失败的消息，将此消息插入到用户当时发送的上下文位置（和现在pc的机制不一样）。如果发送失败的消息，重新发送，会将此消息的位置挪到会话窗口的 ...
       <a href="/2019/07/13/31-消息重发机制方案/" class="more-link">
         继续阅读
         <div class="meta meta-index-post-entry">
@@ -168,6 +219,81 @@
       data-updated="true"
        itemprop="datePublished">
   2019-07-13
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/07/06/25-学习分享会总结/" itemprop="url">学习分享会总结</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      1、QT第一次学习（2019-07-10）学习内容主要包括：https://www.bilibili.com/video/av24374568/?p=3基本的qt主函数结构、消息机制及信号槽机制。sean总结：
+首先需要添加一个Q_OBJECT宏定义，该宏定义可以让该类具有信号槽的功能，要正确的处理信号和槽，必须借助一个称为moc（Meta Object Compiler）的QT工具，MOC工具 ...
+      <a href="/2019/07/06/25-学习分享会总结/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-07-06T05:40:48.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-07-06
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/07/02/28-QtCreator使用技巧/" itemprop="url">QtCreator使用技巧</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      
+显示空格以及制表符在编码规范中，统一规定使用4个空格进行缩进，不使用tab。1 .快捷键ctrl-a + ctrl-i:格式化代码ctrl-k :再左下角进行文件搜索ctrl-m,再键入m：进行函数的搜索ctrl-shit-f：进行全局搜索ctrl-l：跳转到当前文件的具体某一行F4：进行源文件以及相应的头文件的切换
+主题设置 在Tools-option下进行选择即可。备注：欢迎补充。
+
+...
+      <a href="/2019/07/02/28-QtCreator使用技巧/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-07-02T05:42:35.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-07-02
 </time>
 
 
@@ -307,12 +433,51 @@ short counter;char i ...
 
 </article>
   
+  <article class="post">
+
+  <h1 class="title" itemprop="name">
+    <a href="/2019/03/18/46-智能指针总结/" itemprop="url">智能指针总结</a>
+  </h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+      RAII机制资源获得即初始化
+auto_ptr虽然是一个对象，但是重载了operator*和operator-&gt;，其行为非常想指针。在进行赋值拷贝或者拷贝构造的时候，所有权会进行转移。但是有一个点还是要注意的，就是我们不能将一个相同的堆空间同时赋值给二个auto_ptr进行挂管理，这样肯定是会出错的。
+scoped_ptr这个只能指针其实和auto_ptr是很类似的，但是我们不能对其所有权 ...
+      <a href="/2019/03/18/46-智能指针总结/" class="more-link">
+        继续阅读
+        <div class="meta meta-index-post-entry">
+          
+<div class="date">
+
+<time datetime="2019-03-18T07:25:03.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-18
+</time>
+
+
+
+
+
+</div>
+
+        </div>
+      </a>
+    
+  </div>
+
+
+</article>
+  
 </div>
 
 <nav id="pagenavi">
   
   <a href="/page/3/" class="prev">上一页</a>
   
+  
+  <a href="/page/5/" class="next">下一页</a>
   
 </nav>
         </div>

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>40-Valgrind使用 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="最根本的目的就是C++，对底层比较清楚。
+valgrind内存检测工具12345wget ftp:&amp;#x2F;&amp;#x2F;sourceware.org&amp;#x2F;pub&amp;#x2F;valgrind&amp;#x2F;valgrind-3.13.0.tar.bz2tar -jxzf valgrind-3.13">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="40-Valgrind使用"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-03-08T07:17:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-08
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">40-Valgrind使用</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E6%A0%B9%E6%9C%AC%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="toc-number">1.</span> <span class="toc-text">最根本的目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#valgrind%E5%86%85%E5%AD%98%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7"><span class="toc-number">2.</span> <span class="toc-text">valgrind内存检测工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81"><span class="toc-number">2.1.</span> <span class="toc-text">验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">使用</span></a></li></ol></li></ol>
+    </div>
+    
+    <h3 id="最根本的目的"><a href="#最根本的目的" class="headerlink" title="最根本的目的"></a>最根本的目的</h3><p>就是C++，对底层比较清楚。</p>
+<h3 id="valgrind内存检测工具"><a href="#valgrind内存检测工具" class="headerlink" title="valgrind内存检测工具"></a>valgrind内存检测工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget ftp:&#x2F;&#x2F;sourceware.org&#x2F;pub&#x2F;valgrind&#x2F;valgrind-3.13.0.tar.bz2</span><br><span class="line">tar -jxzf valgrind-3.13.0.tar.bz2</span><br><span class="line">.&#x2F;configure</span><br><span class="line">make;</span><br><span class="line">sudo make install;</span><br></pre></td></tr></table></figure>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">valgrind --help</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">Valgrind 使用</span><br><span class="line"></span><br><span class="line">用法: valgrind [options] prog-and-args [options]: 常用选项，适用于所有Valgrind工具</span><br><span class="line"></span><br><span class="line">-tool&#x3D;&lt;name&gt; 最常用的选项。运行 valgrind中名为toolname的工具。默认memcheck。</span><br><span class="line"></span><br><span class="line">h –help 显示帮助信息。</span><br><span class="line">-version 显示valgrind内核的版本，每个工具都有各自的版本。</span><br><span class="line">q –quiet 安静地运行，只打印错误信息。</span><br><span class="line">v –verbose 更详细的信息, 增加错误数统计。</span><br><span class="line">-trace-children&#x3D;no|yes 跟踪子线程? [no]</span><br><span class="line">-track-fds&#x3D;no|yes 跟踪打开的文件描述？[no]</span><br><span class="line">-time-stamp&#x3D;no|yes 增加时间戳到LOG信息? [no]</span><br><span class="line">-log-fd&#x3D;&lt;number&gt; 输出LOG到描述符文件 [2&#x3D;stderr]</span><br><span class="line">-log-file&#x3D;&lt;file&gt; 将输出的信息写入到filename.PID的文件里，PID是运行程序的进行ID</span><br><span class="line">-log-file-exactly&#x3D;&lt;file&gt; 输出LOG信息到 file</span><br><span class="line">-log-file-qualifier&#x3D;&lt;VAR&gt; 取得环境变量的值来做为输出信息的文件名。 [none]</span><br><span class="line">-log-socket&#x3D;ipaddr:port 输出LOG到socket ，ipaddr:port</span><br><span class="line"></span><br><span class="line">LOG信息输出</span><br><span class="line">-xml&#x3D;yes 将信息以xml格式输出，只有memcheck可用</span><br><span class="line">-num-callers&#x3D;&lt;number&gt; show &lt;number&gt; callers in stack traces [12]</span><br><span class="line">-error-limit&#x3D;no|yes 如果太多错误，则停止显示新错误? [yes]</span><br><span class="line">-error-exitcode&#x3D;&lt;number&gt; 如果发现错误则返回错误代码 [0&#x3D;disable]</span><br><span class="line">-db-attach&#x3D;no|yes 当出现错误，valgrind会自动启动调试器gdb。[no]</span><br><span class="line">-db-command&#x3D;&lt;command&gt; 启动调试器的命令行选项[gdb -nw %f %p]</span><br><span class="line"></span><br><span class="line">适用于Memcheck工具的相关选项：</span><br><span class="line">-leak-check&#x3D;no|summary|full 要求对leak给出详细信息? [summary]</span><br><span class="line">-leak-resolution&#x3D;low|med|high how much bt merging in leak check [low]</span><br><span class="line">-show-reachable&#x3D;no|yes show reachable blocks in leak check? [no]</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/03/08/41-多维数组动态内存开辟与释放/" class="prev">上一篇：41-多维数组动态内存开辟与释放</a>
+    
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

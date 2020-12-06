@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://disda.github.io">
+  
+  <title>智能指针总结 | Hexo</title>
+  <meta name="author" content="彭家达(disda)">
+  
+  <meta name="description" content="RAII机制资源获得即初始化
+auto_ptr虽然是一个对象，但是重载了operator*和operator-&amp;gt;，其行为非常想指针。在进行赋值拷贝或者拷贝构造的时候，所有权会进行转移。但是有一个点还是要注意的，就是我们不能将一个相同的堆空间同时赋值给二个auto_ptr进行挂管理，这样肯定是会">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="智能指针总结"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">彭家达(disda)</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/about">关于</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-03-18T07:25:03.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-18
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">智能指针总结</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#RAII%E6%9C%BA%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">RAII机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#auto-ptr"><span class="toc-number">2.</span> <span class="toc-text">auto_ptr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scoped-ptr"><span class="toc-number">3.</span> <span class="toc-text">scoped_ptr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">删除器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shared-ptr"><span class="toc-number">5.</span> <span class="toc-text">shared_ptr</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%BA%8E%E6%A0%87%E5%87%86%E5%BA%93"><span class="toc-number">5.1.</span> <span class="toc-text">应用于标准库</span></a></li></ol></li></ol>
+    </div>
+    
+    <h3 id="RAII机制"><a href="#RAII机制" class="headerlink" title="RAII机制"></a>RAII机制</h3><p>资源获得即初始化</p>
+<h3 id="auto-ptr"><a href="#auto-ptr" class="headerlink" title="auto_ptr"></a>auto_ptr</h3><p>虽然是一个对象，但是重载了operator*和operator-&gt;，其行为非常想指针。<br>在进行赋值拷贝或者拷贝构造的时候，所有权会进行转移。但是有一个点还是要注意的，就是我们不能将一个相同的堆空间同时赋值给二个auto_ptr进行挂管理，这样肯定是会出错的。</p>
+<h3 id="scoped-ptr"><a href="#scoped-ptr" class="headerlink" title="scoped_ptr"></a>scoped_ptr</h3><p>这个只能指针其实和auto_ptr是很类似的，但是我们不能对其所有权进行转移，<br>所以我们是不能对scoped_ptr进行拷贝构造和赋值拷贝等操作。<br>但是还是一样，不支持转移语意。<br>所以以上二者都不能在</p>
+<h3 id="删除器"><a href="#删除器" class="headerlink" title="删除器"></a>删除器</h3><p>就是实现scoped_array和shared_ptr最重要部分。<br>scoped_array没有提供数组访问等功能。</p>
+<h3 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h3><p>实现引用计数，可以安全的放到标准容器中。<br>全功能的类，有正常拷贝，赋值语义，也可以进行shared_ptr间的比较，是最智能的智能指针。</p>
+<p>make_shared()函数可以最多接受10个参数，把他们传递给类型T的构造函数，创建一个shared_ptr<T> 的对象并返回。make_shared()函数要比直接创建shared_ptr对象方式快且高效，因为它内部仅分配一次内存，消除了shared_ptr构造开销。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">string</span>&gt; sp = make_shared&lt;<span class="built_in">string</span>&gt;(<span class="string">&quot;make_shared&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="应用于标准库"><a href="#应用于标准库" class="headerlink" title="应用于标准库"></a>应用于标准库</h4><p>因为shared_ptr支持拷贝语义和比较操作，符合标准容器对元素的要求，所以可以实现shared_ptr支持拷贝语义和比较操作。</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/06/05/26-Qt编码规范/" class="prev">上一篇：Qt编码规范</a>
+    
+    
+    <a href="/2019/03/16/45-weak-ptr/" class="next">下一篇：45-weak_ptr</a>
+    
+  </nav>
+
+        </div>
+        
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 彭家达(disda) -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>
